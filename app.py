@@ -1,85 +1,86 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, session, url_for
+
+# PBKDF2 (Password-Based Key Derivation Function 2)
+from werkzeug.security import generate_password_hash, check_password_hash 
+
+from flask_sqlalchemy import SQLAlchemy
+
+
+
+
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 
+
+
+
+
+# Configure SQL Alchemy
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
+
+
+
+
+
+# Database Model ~ Single Row
+class User(db.Model):
+    # Class Variables
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(25), unique=True, nullable=False)
+    password = db.Column(db.String(150), nullable=False)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+
+
+
+# Routes
 @app.route("/")
+def home():
+    # if naka-log in daan kay ditso na sa dashboard
+    if "username" in session:
+        return redirect(url_for('dashboard'))
+
+    #if wla pa nag log in, sa landing page pa lang
+    return render_template("index.html")
+
+# Login Route
+@app.route("/login", methods=["POST"])
 def login():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Login Page</title>
-        <style>
-            body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background: linear-gradient(135deg, #4facfe, #00f2fe);
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+    # Collect info from form
+    username = request.form["username"]
+    password = request.form["password"]
 
-            .login-box {
-                background: white;
-                padding: 40px;
-                border-radius: 12px;
-                width: 320px;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-                text-align: center;
-            }
+    # Chek if naa ba sa DB
 
-            .login-box h2 {
-                margin-bottom: 20px;
-            }
+    # else: show homepage
+    
 
-            .login-box input {
-                width: 100%;
-                padding: 10px;
-                margin: 10px 0;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-            }
+    user = User.query.filter_by(username=username).first()
 
-            .login-box button {
-                width: 100%;
-                padding: 10px;
-                background: #4facfe;
-                border: none;
-                color: white;
-                border-radius: 6px;
-                cursor: pointer;
-                margin-top: 10px;
-            }
+    if user and user.check_password(password):
+        session["username"] = user.username
+        return redirect(url_for('dashboard'))
+    
+    return redirect(url_for('home'))
 
-            .login-box button:hover {
-                background: #00c6ff;
-            }
+# Register Route
 
-            .note {
-                font-size: 12px;
-                color: gray;
-                margin-top: 10px;
-            }
-        </style>
-    </head>
+# Dashboard Route
 
-    <body>
-        <div class="login-box">
-            <h2>Login</h2>
+# Logout Route
 
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
 
-            <button>Sign In</button>
 
-            <div class="note">
-                UI only (no backend logic)
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-
-if __name__ == "__main__":
+if __name__ ==   "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
