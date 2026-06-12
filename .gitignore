@@ -1,0 +1,45 @@
+# =========================
+# Virtual Environment
+# =========================
+venv/
+.venv/
+
+# =========================
+# Python cache files
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# =========================
+# Environment variables
+# =========================
+.env
+
+# =========================
+# IDE / Editor files
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# ML / Data files (optional but recommended)
+# =========================
+*.pkl
+*.joblib
+*.h5
+
+# If your dataset is large or sensitive:
+data/
+
+# =========================
+# Logs
+# =========================
+*.log
