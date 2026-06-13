@@ -43,3 +43,41 @@ def dashboard():
         "main/dashboard.html",
         user=user
     )
+
+# History Route
+@main.route("/history")
+def history():
+
+    if session.get("guest"):
+        return redirect(url_for("main.dashboard"))
+
+    if "username" not in session:
+        return redirect(url_for("auth.login_page"))
+
+    user = User.query.filter_by(
+        username=session["username"]
+    ).first()
+
+    return render_template(
+        "main/history.html",
+        user=user
+    )
+
+# Settings Route
+@main.route("/settings")
+def settings():
+
+    if session.get("guest"):
+        return redirect(url_for("main.dashboard"))
+
+    if "username" not in session:
+        return redirect(url_for("auth.login_page"))
+
+    user = User.query.filter_by(
+        username=session["username"]
+    ).first()
+
+    return render_template(
+        "main/settings.html",
+        user=user
+    )

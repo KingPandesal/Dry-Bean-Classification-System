@@ -1,0 +1,145 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Settings
+{% endblock %}
+
+{% block page_title %}
+Settings
+{% endblock %}
+
+{% block content %}
+
+<!-- Main Content -->
+<main>
+
+    <!-- Settings Content -->
+    <div class="p-6 max-w-4xl mx-auto space-y-6">
+
+        <!-- Profile Section -->
+        <div class="bg-slate-800 rounded-xl border border-slate-700 p-6">
+            <h2 class="text-lg font-bold text-white mb-6">Profile Settings</h2>
+            
+            <div class="flex items-center gap-6 mb-6">
+                <div class="h-20 w-20 rounded-full bg-slate-700 flex items-center justify-center">
+                    <span class="text-white font-bold text-2xl">JD</span>
+                </div>
+                <div>
+                    <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition">
+                        Change Avatar
+                    </button>
+                    <p class="text-xs text-slate-500 mt-2">JPG, PNG or GIF. Max 2MB.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label for="fullname" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Full Name</label>
+                    <input id="fullname" type="text" value="John Doe"
+                        class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                </div>
+                <div>
+                    <label for="username" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Username</label>
+                    <input id="username" type="text" value="johndoe"
+                        class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                </div>
+                <div class="md:col-span-2">
+                    <label for="email" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Email Address</label>
+                    <input id="email" type="email" value="john@example.com"
+                        class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+
+        <!-- Notification Section -->
+        <div class="bg-slate-800 rounded-xl border border-slate-700 p-6">
+            <h2 class="text-lg font-bold text-white mb-6">Notifications</h2>
+            
+            <div class="space-y-4">
+                <!-- Toggle 1 -->
+                <div class="flex items-center justify-between py-3 border-b border-slate-700">
+                    <div>
+                        <p class="text-sm text-white">Email Notifications</p>
+                        <p class="text-xs text-slate-500">Receive updates via email</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-700 peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+
+                <!-- Toggle 2 -->
+                <div class="flex items-center justify-between py-3 border-b border-slate-700">
+                    <div>
+                        <p class="text-sm text-white">Prediction Alerts</p>
+                        <p class="text-xs text-slate-500">Get notified when new predictions are ready</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-700 peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+
+                <!-- Toggle 3 -->
+                <div class="flex items-center justify-between py-3">
+                    <div>
+                        <p class="text-sm text-white">Weekly Summary</p>
+                        <p class="text-xs text-slate-500">Receive a weekly performance summary</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-700 peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Password Section -->
+        <div class="bg-slate-800 rounded-xl border border-slate-700 p-6">
+            <h2 class="text-lg font-bold text-white mb-6">Change Password</h2>
+            
+            <div class="space-y-5">
+                <div>
+                    <label for="current-password" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Current Password</label>
+                    <input id="current-password" type="password" placeholder="••••••••"
+                        class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                </div>
+                <div>
+                    <label for="new-password" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">New Password</label>
+                    <input id="new-password" type="password" placeholder="••••••••"
+                        class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                </div>
+                <div>
+                    <label for="confirm-password" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Confirm New Password</label>
+                    <input id="confirm-password" type="password" placeholder="••••••••"
+                        class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition">
+                    Update Password
+                </button>
+            </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="bg-slate-800 rounded-xl border border-red-900/50 p-6">
+            <h2 class="text-lg font-bold text-red-400 mb-2">Danger Zone</h2>
+            <p class="text-sm text-slate-400 mb-6">Once you delete your account, there is no going back.</p>
+            
+            <button class="px-4 py-2 bg-red-600/10 text-red-400 border border-red-600/20 text-sm rounded-lg hover:bg-red-600 hover:text-white transition">
+                Delete Account
+            </button>
+        </div>
+
+    </div>
+</main>
+
+{% endblock %}
