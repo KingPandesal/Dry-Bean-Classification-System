@@ -6,6 +6,8 @@ from flask import (
     url_for
 )
 
+from models.user import User
+
 main = Blueprint(
     "main",
     __name__
@@ -33,6 +35,11 @@ def dashboard():
             url_for("auth.login_page")
         )
 
+    user = User.query.filter_by(
+        username=session["username"]
+    ).first()
+
     return render_template(
-        "main/dashboard.html"
+        "main/dashboard.html",
+        user=user
     )
