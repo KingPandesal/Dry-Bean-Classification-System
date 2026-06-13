@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>PredictED</title>
+    <title>CardioRisk AI</title>
 
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -18,23 +18,23 @@
     </style>
 </head>
 
-<body class="bg-slate-900 text-slate-300 antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-white text-slate-800 antialiased selection:bg-red-500 selection:text-white">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur border-b border-red-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <div class="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <div class="h-8 w-8 bg-red-600 rounded-lg flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h4l3 8 4-16 3 8h4" />
                         </svg>
                     </div>
-                    <span class="text-white font-bold text-lg tracking-tight">PredictED</span>
+                    <span class="text-slate-900 font-bold text-lg tracking-tight">CardioRisk AI</span>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="#features" class="hidden md:block text-sm text-slate-400 hover:text-white transition">Features</a>
-                    <a href="{{ url_for('auth.login') }}" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+                    <a href="#features" class="hidden md:block text-sm text-slate-500 hover:text-red-600 transition">Features</a>
+                    <a href="{{ url_for('auth.login') }}" class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition">
                         Get Started
                     </a>
                 </div>
@@ -44,184 +44,160 @@
 
     <!-- Hero Section -->
     <section class="pt-32 pb-20 lg:pt-44 lg:pb-32 relative overflow-hidden">
-        <!-- Background Glow -->
-        <div class="absolute top-1/4 -left-20 w-80 h-80 bg-blue-600/20 rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-slate-700/30 rounded-full blur-[100px]"></div>
+        <div class="absolute top-1/4 -left-20 w-80 h-80 bg-red-200/30 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-red-100/40 rounded-full blur-[100px]"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-3xl mx-auto text-center">
-                <span class="inline-block px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-blue-400 text-xs font-medium tracking-wide mb-6">
-                    AI-POWERED ACADEMIC PREDICTOR
+                <span class="inline-block px-4 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-medium tracking-wide mb-6">
+                    AI-POWERED HEART DISEASE RISK CLASSIFIER
                 </span>
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                    Know Your <span class="text-blue-500">Performance</span><br>Before It Happens
+
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+                    Know Your <span class="text-red-600">Heart Health Risk</span><br>Before It’s Too Late
                 </h1>
-                <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-                    Enter your current study habits, attendance, and grades. Our system predicts your academic performance level—<span class="text-white">Low</span>, <span class="text-white">Average</span>, or <span class="text-white">High</span>—so you can act now.
+
+                <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+                    Enter your health metrics like blood pressure, cholesterol, age, and heart rate.
+                    Our system predicts your risk level — <span class="text-red-600 font-semibold">Low</span>,
+                    <span class="text-yellow-500 font-semibold">Moderate</span>, or
+                    <span class="text-red-700 font-semibold">High</span>.
                 </p>
+
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ url_for('auth.login_page') }}" class="px-8 py-3.5 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition shadow-lg shadow-blue-600/20">
-                        Predict My Performance
+                    <a href="{{ url_for('auth.login_page') }}" class="px-8 py-3.5 text-base font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition shadow-lg shadow-red-200">
+                        Check My Heart Risk
                     </a>
                 </div>
             </div>
 
             <!-- Dashboard Preview -->
             <div class="mt-16 max-w-4xl mx-auto">
-                <div class="bg-slate-800 rounded-xl border border-slate-700 p-1 shadow-2xl">
-                    <div class="bg-slate-900/50 rounded-lg p-6 md:p-10">
-                        <!-- Mock UI -->
+                <div class="bg-white rounded-xl border border-red-100 p-1 shadow-2xl">
+                    <div class="bg-red-50/40 rounded-lg p-6 md:p-10">
                         <div class="flex flex-col md:flex-row gap-8 items-center justify-center">
+
                             <!-- Input Stats -->
                             <div class="flex-1 w-full space-y-4">
-                                <div class="flex justify-between items-center py-2 border-b border-slate-800">
-                                    <span class="text-slate-500 text-sm">Study Hours/Day</span>
-                                    <span class="text-white font-medium">4.5 hrs</span>
+                                <div class="flex justify-between items-center py-2 border-b border-red-100">
+                                    <span class="text-slate-500 text-sm">Blood Pressure</span>
+                                    <span class="text-slate-900 font-medium">120/80</span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-slate-800">
-                                    <span class="text-slate-500 text-sm">Attendance</span>
-                                    <span class="text-white font-medium">92%</span>
+                                <div class="flex justify-between items-center py-2 border-b border-red-100">
+                                    <span class="text-slate-500 text-sm">Cholesterol</span>
+                                    <span class="text-slate-900 font-medium">190 mg/dL</span>
                                 </div>
-                                <div class="flex justify-between items-center py-2 border-b border-slate-800">
-                                    <span class="text-slate-500 text-sm">Current GPA</span>
-                                    <span class="text-white font-medium">3.4</span>
+                                <div class="flex justify-between items-center py-2 border-b border-red-100">
+                                    <span class="text-slate-500 text-sm">Heart Rate</span>
+                                    <span class="text-slate-900 font-medium">72 bpm</span>
                                 </div>
                             </div>
-                            
-                            <!-- Divider -->
-                            <div class="hidden md:block w-px h-24 bg-slate-800"></div>
-                            
+
                             <!-- Result -->
                             <div class="w-full md:w-48 text-center">
-                                <p class="text-slate-500 text-xs uppercase tracking-wider mb-3">Predicted Level</p>
-                                <div class="bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-3">
-                                    <span class="text-green-400 font-bold text-lg">HIGH</span>
+                                <p class="text-slate-500 text-xs uppercase tracking-wider mb-3">Risk Level</p>
+                                <div class="bg-red-600/10 border border-red-200 rounded-lg px-4 py-3">
+                                    <span class="text-red-600 font-bold text-lg">LOW RISK</span>
                                 </div>
-                                <p class="text-green-400/70 text-xs mt-2">92% Confidence</p>
+                                <p class="text-red-500/70 text-xs mt-2">89% Confidence</p>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
     <!-- Features Grid -->
-    <section id="features" class="py-20 bg-slate-800/30">
+    <section id="features" class="py-20 bg-red-50/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Feature 1 -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500/50 transition group">
-                    <div class="h-10 w-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+
+                <div class="bg-white p-6 rounded-xl border border-red-100 hover:border-red-300 transition group">
+                    <div class="h-10 w-10 bg-red-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-600 transition">
+                        ❤️
                     </div>
-                    <h3 class="text-white font-semibold mb-2">Simple Input</h3>
-                    <p class="text-slate-400 text-sm">Just enter attendance, study hours, and recent grades. No complex data required.</p>
+                    <h3 class="text-slate-900 font-semibold mb-2">Simple Health Input</h3>
+                    <p class="text-slate-500 text-sm">Enter basic vitals like blood pressure, cholesterol, and age.</p>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500/50 transition group">
-                    <div class="h-10 w-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+                <div class="bg-white p-6 rounded-xl border border-red-100 hover:border-red-300 transition group">
+                    <div class="h-10 w-10 bg-red-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-600 transition">
+                        ⚡
                     </div>
-                    <h3 class="text-white font-semibold mb-2">Instant Prediction</h3>
-                    <p class="text-slate-400 text-sm">Get your performance level (Low, Average, High) analyzed in seconds.</p>
+                    <h3 class="text-slate-900 font-semibold mb-2">Instant Risk Prediction</h3>
+                    <p class="text-slate-500 text-sm">Get your heart disease risk level in seconds using AI.</p>
                 </div>
 
-                <!-- Feature 3 -->
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500/50 transition group">
-                    <div class="h-10 w-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                        </svg>
+                <div class="bg-white p-6 rounded-xl border border-red-100 hover:border-red-300 transition group">
+                    <div class="h-10 w-10 bg-red-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-600 transition">
+                        🩺
                     </div>
-                    <h3 class="text-white font-semibold mb-2">Actionable Tips</h3>
-                    <p class="text-slate-400 text-sm">Receive custom recommendations to improve your predicted level.</p>
+                    <h3 class="text-slate-900 font-semibold mb-2">Health Recommendations</h3>
+                    <p class="text-slate-500 text-sm">Receive personalized tips to improve heart health.</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Performance Levels Showcase -->
+    <!-- Risk Levels -->
     <section class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white">Understanding Your Results</h2>
-                <p class="mt-3 text-slate-400">We categorize your predicted performance into three clear levels.</p>
+                <h2 class="text-3xl font-bold text-slate-900">Understanding Your Risk Levels</h2>
+                <p class="mt-3 text-slate-500">We classify heart disease risk into three clear categories.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
                 <!-- Low -->
-                <div class="bg-slate-800/50 rounded-2xl p-6 border border-red-500/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="h-3 w-3 rounded-full bg-red-500"></div>
-                        <h3 class="text-lg font-bold text-white">Low Performance</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4">Students at risk of underperforming. Requires immediate intervention in study habits.</p>
-                    <ul class="space-y-2 text-xs text-slate-500">
-                        <li class="flex items-center gap-2"><span>•</span> Below 60% success rate</li>
-                        <li class="flex items-center gap-2"><span>•</span> Low attendance correlation</li>
-                        <li class="flex items-center gap-2"><span>•</span> Study hours below 2/day</li>
-                    </ul>
+                <div class="bg-white rounded-2xl p-6 border border-green-200">
+                    <h3 class="text-lg font-bold text-green-600 mb-2">Low Risk</h3>
+                    <p class="text-slate-500 text-sm mb-4">Healthy cardiovascular condition with minimal risk factors.</p>
                 </div>
 
-                <!-- Average -->
-                <div class="bg-slate-800/50 rounded-2xl p-6 border border-yellow-500/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
-                        <h3 class="text-lg font-bold text-white">Average Performance</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4">Consistent performance. Room for improvement with optimized habits.</p>
-                    <ul class="space-y-2 text-xs text-slate-500">
-                        <li class="flex items-center gap-2"><span>•</span> 60-85% success rate</li>
-                        <li class="flex items-center gap-2"><span>•</span> Stable GPA around 3.0</li>
-                        <li class="flex items-center gap-2"><span>•</span> Moderate study hours</li>
-                    </ul>
+                <!-- Moderate -->
+                <div class="bg-white rounded-2xl p-6 border border-yellow-200">
+                    <h3 class="text-lg font-bold text-yellow-600 mb-2">Moderate Risk</h3>
+                    <p class="text-slate-500 text-sm mb-4">Some risk factors present; lifestyle improvement recommended.</p>
                 </div>
 
                 <!-- High -->
-                <div class="bg-slate-800/50 rounded-2xl p-6 border border-green-500/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="h-3 w-3 rounded-full bg-green-500"></div>
-                        <h3 class="text-lg font-bold text-white">High Performance</h3>
-                    </div>
-                    <p class="text-slate-400 text-sm mb-4">Students on track for excellence. Maintain habits to sustain results.</p>
-                    <ul class="space-y-2 text-xs text-slate-500">
-                        <li class="flex items-center gap-2"><span>•</span> Above 85% success rate</li>
-                        <li class="flex items-center gap-2"><span>•</span> High attendance &gt;90%</li>
-                        <li class="flex items-center gap-2"><span>•</span> Consistent study routine</li>
-                    </ul>
+                <div class="bg-white rounded-2xl p-6 border border-red-200">
+                    <h3 class="text-lg font-bold text-red-600 mb-2">High Risk</h3>
+                    <p class="text-slate-500 text-sm mb-4">Immediate medical attention and lifestyle changes advised.</p>
                 </div>
+
             </div>
+
         </div>
     </section>
 
     <!-- CTA -->
     <section class="py-20">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-white mb-4">Ready to know your potential?</h2>
-            <p class="text-slate-400 mb-8">Join thousands of students planning their academic success.</p>
-            <a href="{{ url_for('auth.login_page') }}" class="inline-block px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
-                Start Predicting Now
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Take Control of Your Heart Health</h2>
+            <p class="text-slate-500 mb-8">Early detection can save lives. Start your assessment today.</p>
+            <a href="{{ url_for('auth.login_page') }}" class="inline-block px-8 py-3.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition">
+                Start Risk Check
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-8">
+    <footer class="border-t border-red-100 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-slate-500 text-sm">© 2024 PredictED. All rights reserved.</p>
+            <p class="text-slate-500 text-sm">© 2026 CardioRisk AI. All rights reserved.</p>
             <div class="flex gap-6">
-                <a href="#" class="text-slate-500 hover:text-white text-sm transition">Privacy</a>
-                <a href="#" class="text-slate-500 hover:text-white text-sm transition">Terms</a>
+                <a href="#" class="text-slate-500 hover:text-red-600 text-sm transition">Privacy</a>
+                <a href="#" class="text-slate-500 hover:text-red-600 text-sm transition">Terms</a>
             </div>
         </div>
     </footer>
 
 </body>
-
 </html>
