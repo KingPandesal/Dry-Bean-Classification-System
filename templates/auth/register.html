@@ -28,8 +28,14 @@
             <p class="text-slate-400 text-sm mt-2">Join GradeWise to predict your future</p>
         </div>
 
+        {% if error %}
+        <div class="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+            {{ error }}
+        </div>
+        {% endif %}
+
         <!-- Form -->
-        <form action="#" method="POST" class="space-y-5">
+        <form id="auth-form" action="{{ url_for('auth.register') }}" method="POST" class="space-y-5">
             
             <!-- Name Field -->
             <div>
@@ -49,9 +55,9 @@
                 </div>
             </div>
 
-            <!-- Gmail Field -->
+            <!-- Email Address Field -->
             <div>
-                <label for="email" class="block text-xs font-medium text-slate-400 uppercase tracking-wider">Gmail</label>
+                <label for="email" class="block text-xs font-medium text-slate-400 uppercase tracking-wider">Email Address</label>
                 <div class="mt-1">
                     <input id="email" name="email" type="email" autocomplete="email" required placeholder="john@example.com"
                         class="block w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
@@ -77,13 +83,13 @@
             </div>
 
             <!-- Terms Checkbox -->
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
                 <input id="terms" name="terms" type="checkbox" required
                     class="h-4 w-4 bg-slate-700 border-slate-600 rounded text-blue-600 focus:ring-blue-600">
                 <label for="terms" class="ml-2 block text-sm text-slate-400">
                     I agree to the <a href="#" class="text-blue-500 hover:text-blue-400">Terms</a> and <a href="#" class="text-blue-500 hover:text-blue-400">Privacy</a>
                 </label>
-            </div>
+            </div> -->
 
             <!-- Submit Button -->
             <button type="submit" 

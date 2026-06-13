@@ -1,9 +1,33 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>SPPS</title>
 
-{% block body %}
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold text-white">Dashboard</h1>
-        <p class="text-slate-400">Welcome to your dashboard, {{username}}!</p>
-    </div>
-    
-{% endblock %}
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-white">Dashboard</h1>
+    <p class="text-slate-400">Welcome to your dashboard, {{ session['username'] }}!</p>
+</div>
+
+<a href="{{ url_for('auth.logout') }}">
+    Logout
+</a>
+</body>
+</html>
