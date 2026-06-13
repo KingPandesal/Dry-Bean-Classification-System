@@ -20,6 +20,14 @@ from routes.main import main
 app.register_blueprint(auth)
 app.register_blueprint(main)
 
+from flask import render_template
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template(
+        "errors/404.html"
+    ), 404
+
 if __name__ ==   "__main__":
     with app.app_context():
         db.create_all()

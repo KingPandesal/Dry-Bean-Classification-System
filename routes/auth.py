@@ -16,10 +16,30 @@ auth = Blueprint(
     url_prefix="/auth"
 )
 
+# FOR GUEST MODE
+@auth.route("/guest")
+def guest():
+
+    session.clear()
+
+    session["guest"] = True
+
+    return redirect(
+        url_for("main.dashboard")
+    )
+
 # Login Page Route 
 @auth.route("/login")
 def login_page():
-    return render_template("auth/login.html")
+
+    if "username" in session or session.get("guest"):
+        return redirect(
+            url_for("main.dashboard")
+        )
+
+    return render_template(
+        "auth/login.html"
+    )
 
 @auth.route("/login", methods=["POST"])
 def login():
@@ -45,7 +65,15 @@ def login():
 # Register Page Route
 @auth.route("/register")
 def register_page():
-    return render_template("auth/register.html")
+
+    if "username" in session or session.get("guest"):
+        return redirect(
+            url_for("main.dashboard")
+        )
+
+    return render_template(
+        "auth/register.html"
+    )
 
 @auth.route("/register", methods=["POST"])
 def register():
@@ -98,7 +126,7 @@ def register():
 @auth.route("/logout")
 def logout():
 
-    session.pop("username", None)
+    session.clear()
 
     return redirect(
         url_for("main.home")

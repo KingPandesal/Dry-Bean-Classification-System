@@ -17,7 +17,7 @@ main = Blueprint(
 @main.route("/")
 def home():
 
-    if "username" in session:
+    if "username" in session or session.get("guest"):
         return redirect(
             url_for("main.dashboard")
         )
@@ -30,14 +30,17 @@ def home():
 @main.route("/dashboard")
 def dashboard():
 
-    if "username" not in session:
+    if "username" not in session and not session.get("guest"):
         return redirect(
             url_for("auth.login_page")
         )
 
-    user = User.query.filter_by(
-        username=session["username"]
-    ).first()
+    user = None
+
+    if "username" in session:
+        user = User.query.filter_by(
+            username=session["username"]
+        ).first()
 
     return render_template(
         "main/dashboard.html",
