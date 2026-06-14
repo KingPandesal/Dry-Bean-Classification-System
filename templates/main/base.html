@@ -150,11 +150,14 @@
         {% block content %}
         {% endblock %}
 
+        <div id="toast-container" class="fixed bottom-5 right-5 space-y-3 z-50"></div>
+
     </main>
 
     {% include "partials/toasts.html" %}
     <script src="{{ url_for('static', filename='js/toasts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/scroll-restoration.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main/settings.js') }}"></script>
 
 </body>
 </html>
