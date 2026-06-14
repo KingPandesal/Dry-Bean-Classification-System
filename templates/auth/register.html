@@ -46,21 +46,36 @@
             <!-- Full Name -->
             <div>
                 <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Full Name</label>
-                <input name="name" type="text" required placeholder="John Doe"
+                <input 
+                    name="name" 
+                    type="text" 
+                    required 
+                    placeholder="John Doe"
+                    value="{{ form.name if form else '' }}"
                     class="mt-1 block w-full px-4 py-3 bg-white border border-red-100 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition">
             </div>
 
             <!-- Username -->
             <div>
                 <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Username</label>
-                <input name="username" type="text" required placeholder="johndoe"
+                <input 
+                    name="username" 
+                    type="text" 
+                    required 
+                    placeholder="johndoe"
+                    value="{{ form.username if form else '' }}"
                     class="mt-1 block w-full px-4 py-3 bg-white border border-red-100 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition">
             </div>
 
             <!-- Email -->
             <div>
                 <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Email Address</label>
-                <input name="email" type="email" required placeholder="john@example.com"
+                <input 
+                    name="email" 
+                    type="email" 
+                    required 
+                    placeholder="john@example.com"
+                    value="{{ form.email if form else '' }}"
                     class="mt-1 block w-full px-4 py-3 bg-white border border-red-100 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition">
             </div>
 

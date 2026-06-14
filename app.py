@@ -15,10 +15,12 @@ db.init_app(app)
 from models.user import User  # imported so SQLAlchemy registers model
 from routes.auth import auth
 from routes.main import main
+from routes.account import account
 
 # Register blueprints
 app.register_blueprint(auth)
 app.register_blueprint(main)
+app.register_blueprint(account)
 
 from flask import render_template
 

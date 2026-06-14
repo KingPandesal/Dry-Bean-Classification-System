@@ -10,6 +10,7 @@ from flask import (
 from extensions import db
 from models.user import User
 import re
+from utils.validators import validate_password
 
 auth = Blueprint(
     "auth",
@@ -109,38 +110,12 @@ def register():
     # ----------------------------
     # Password validations
     # ----------------------------
-    if len(password) < 8:
-        return render_template(
-            "auth/register.html",
-            error="Password must be at least 8 characters long.",
-            form=request.form
-        )
+    error = validate_password(password)
 
-    if not re.search(r"[A-Z]", password):
+    if error:
         return render_template(
             "auth/register.html",
-            error="Password must contain at least 1 uppercase letter.",
-            form=request.form
-        )
-
-    if not re.search(r"[a-zA-Z]", password):
-        return render_template(
-            "auth/register.html",
-            error="Password must contain letters.",
-            form=request.form
-        )
-
-    if not re.search(r"\d", password):
-        return render_template(
-            "auth/register.html",
-            error="Password must contain at least 1 number.",
-            form=request.form
-        )
-
-    if not re.search(r"[!@#$%^&*(),.?\":{}|<>_\-\\/]", password):
-        return render_template(
-            "auth/register.html",
-            error="Password must contain at least 1 special character.",
+            error=error,
             form=request.form
         )
 
