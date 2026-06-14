@@ -1,9 +1,14 @@
 from flask import Flask
 from extensions import db
 
+import os
+
 app = Flask(__name__)
 
 app.secret_key = "your_secret_key"
+
+app.config["UPLOAD_FOLDER"] = "static/uploads"
+app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 * 1024
 
 # Configure SQL Alchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"

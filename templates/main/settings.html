@@ -23,14 +23,34 @@ Settings
 
             <div class="flex items-center gap-6 mb-6">
 
-                <div class="h-20 w-20 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
-                    <span class="text-red-600 font-bold text-2xl">JD</span>
-                </div>
+                {% if session.get("guest") or not user %}
+                    <div class="h-20 w-20 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
+                        <span class="text-red-600 font-bold text-2xl">
+                            GU
+                        </span>
+                    </div>
+
+                {% elif user.avatar %}
+                    <img src="{{ url_for('static', filename='uploads/' + user.avatar) }}"
+                        class="h-20 w-20 rounded-full object-cover border border-red-100 avatar-img">
+
+                {% else %}
+                    <div class="h-20 w-20 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
+                        <span class="text-red-600 font-bold text-2xl">
+                            {{ (user.name or "U")[:2].upper() }}
+                        </span>
+                    </div>
+                {% endif %}
 
                 <div>
-                    <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition shadow">
+                    <input type="file" id="avatar-input" accept="image/*" hidden>
+
+                    <button type="button"
+                            id="avatar-btn"
+                            class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition shadow">
                         Change Avatar
                     </button>
+
                     <p class="text-xs text-gray-500 mt-2">
                         JPG, PNG or GIF. Max 2MB.
                     </p>
@@ -38,39 +58,52 @@ Settings
 
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <form id="profile-form">
 
-                <div>
-                    <label class="block text-xs font-medium text-red-500 uppercase mb-1">
-                        Full Name
-                    </label>
-                    <input type="text" value="John Doe"
-                        class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    
+                    <div>
+                        <label class="block text-xs font-medium text-red-500 uppercase mb-1">
+                            Full Name
+                        </label>
+                        <input 
+                            name="name"
+                            type="text" 
+                            value="{{ user.name }}"
+                            class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-red-500 uppercase mb-1">
+                            Username
+                        </label>
+                        <input 
+                            name="username"
+                            type="text" 
+                            value="{{ user.username }}"
+                            class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-red-500 uppercase mb-1">
+                            Email Address
+                        </label>
+                        <input 
+                            name="email"
+                            type="email" 
+                            value="{{ user.email }}"
+                            class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                    </div>
+
                 </div>
 
-                <div>
-                    <label class="block text-xs font-medium text-red-500 uppercase mb-1">
-                        Username
-                    </label>
-                    <input type="text" value="johndoe"
-                        class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                <div class="mt-6 flex justify-end">
+                    <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition">
+                        Save Changes
+                    </button>
                 </div>
 
-                <div class="md:col-span-2">
-                    <label class="block text-xs font-medium text-red-500 uppercase mb-1">
-                        Email Address
-                    </label>
-                    <input type="email" value="john@example.com"
-                        class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
-                </div>
-
-            </div>
-
-            <div class="mt-6 flex justify-end">
-                <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition">
-                    Save Changes
-                </button>
-            </div>
+            </form>
 
         </div>
 

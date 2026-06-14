@@ -4,18 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>CardioRisk AI</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing-page-animation.css') }}">
 
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-    </style>
 </head>
 
 <body class="bg-white text-slate-800 antialiased selection:bg-red-500 selection:text-white">
@@ -54,7 +46,7 @@
                 </span>
 
                 <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-                    Know Your <span class="text-red-600">Heart Health Risk</span><br>Before It’s Too Late
+                    Know Your <span class="text-red-600">Heart Health</span><br>Before It’s Too Late
                 </h1>
 
                 <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,23 +15,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #ffffff;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #fecaca;
-            border-radius: 3px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/fonts.css') }}">
+    
 </head>
 
 <body class="bg-white text-slate-700 antialiased selection:bg-red-500 selection:text-white">
@@ -81,49 +68,64 @@
         </nav>
 
         <!-- User Profile -->
-        <div class="p-4 border-t border-red-100">
+        <!-- User Profile -->
+        <a href="{{ url_for('main.settings') }}"
+        class="block p-4 border-t border-red-100 hover:bg-red-50 transition">
+
             <div class="flex items-center gap-3">
 
-                <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
-                    <span class="text-red-600 font-semibold text-sm">
+                {% if session.get("guest") %}
 
-                        {% if session.get("guest") %}
+                    <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                        <span class="text-red-600 font-semibold text-sm">
                             GU
-                        {% else %}
-                            {{ user.name[:2].upper() }}
-                        {% endif %}
+                        </span>
+                    </div>
 
-                    </span>
-                </div>
+                {% elif user.avatar %}
+
+                    <img src="{{ url_for('static', filename='uploads/' + user.avatar) }}"
+                        class="h-10 w-10 rounded-full object-cover border border-red-100">
+
+                {% else %}
+
+                    <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
+                        <span class="text-red-600 font-semibold text-sm">
+                            {{ user.name[:2].upper() }}
+                        </span>
+                    </div>
+
+                {% endif %}
 
                 <div class="flex-1 min-w-0">
 
                     {% if session.get("guest") %}
 
-                    <p class="text-sm font-medium text-slate-900 truncate">
-                        Guest User
-                    </p>
+                        <p class="text-sm font-medium text-slate-900 truncate">
+                            Guest User
+                        </p>
 
-                    <p class="text-xs text-slate-500 truncate">
-                        Results will not be saved
-                    </p>
+                        <p class="text-xs text-slate-500 truncate">
+                            Results will not be saved
+                        </p>
 
                     {% else %}
 
-                    <p class="text-sm font-medium text-slate-900 truncate">
-                        {{ user.name }}
-                    </p>
+                        <p class="text-sm font-medium text-slate-900 truncate">
+                            {{ user.name }}
+                        </p>
 
-                    <p class="text-xs text-slate-500 truncate">
-                        {{ user.email }}
-                    </p>
+                        <p class="text-xs text-slate-500 truncate">
+                            {{ user.email }}
+                        </p>
 
                     {% endif %}
 
                 </div>
 
             </div>
-        </div>
+
+        </a>
 
     </aside>
 
