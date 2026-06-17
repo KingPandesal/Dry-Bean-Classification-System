@@ -1,11 +1,11 @@
 {% extends "main/base.html" %}
 
 {% block title %}
-Heart Risk Classifier - History
+Dry Bean Classifier - History
 {% endblock %}
 
 {% block page_title %}
-History
+Prediction History
 {% endblock %}
 
 {% block content %}
@@ -18,135 +18,167 @@ History
         <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
 
             <div class="flex gap-2">
-                <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg shadow">
+                <button class="px-4 py-2 bg-green-700 text-white text-sm rounded-lg shadow">
                     All
                 </button>
 
-                <button class="px-4 py-2 bg-white text-red-600 text-sm rounded-lg border border-red-200 hover:bg-red-50 transition">
-                    High Risk
+                <button class="px-4 py-2 bg-white text-green-700 text-sm rounded-lg border border-green-200 hover:bg-green-50 transition">
+                    BARBUNYA
                 </button>
 
-                <button class="px-4 py-2 bg-white text-red-600 text-sm rounded-lg border border-red-200 hover:bg-red-50 transition">
-                    Moderate Risk
+                <button class="px-4 py-2 bg-white text-green-700 text-sm rounded-lg border border-green-200 hover:bg-green-50 transition">
+                    CALI
                 </button>
 
-                <button class="px-4 py-2 bg-white text-red-600 text-sm rounded-lg border border-red-200 hover:bg-red-50 transition">
-                    Low Risk
+                <button class="px-4 py-2 bg-white text-green-700 text-sm rounded-lg border border-green-200 hover:bg-green-50 transition">
+                    SEKER
                 </button>
             </div>
 
             <div class="relative">
+
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-5 w-5 text-red-400 absolute left-3 top-1/2 -translate-y-1/2"
+                     class="h-5 w-5 text-green-400 absolute left-3 top-1/2 -translate-y-1/2"
                      fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+
                 </svg>
 
-                <input type="text" placeholder="Search history..."
-                    class="pl-10 pr-4 py-2 bg-white border border-red-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400 text-sm w-full sm:w-64">
+                <input type="text" placeholder="Search predictions..."
+                    class="pl-10 pr-4 py-2 bg-white border border-green-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm w-full sm:w-64">
+
             </div>
+
         </div>
 
         <!-- Table -->
-        <div class="bg-white rounded-xl border border-red-100 shadow-sm overflow-hidden">
+        <div class="bg-white rounded-xl border border-green-100 shadow-sm overflow-hidden">
 
             <div class="overflow-x-auto">
                 <table class="w-full">
 
-                    <thead class="bg-red-50">
-                        <tr class="border-b border-red-100">
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">Date</th>
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">Heart Risk</th>
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">BP</th>
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">Cholesterol</th>
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">Heart Rate</th>
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">Result</th>
-                            <th class="text-left text-xs font-semibold text-red-500 uppercase px-6 py-4">Confidence</th>
+                    <thead class="bg-green-50">
+
+                        <tr class="border-b border-green-100">
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Date
+                            </th>
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Bean Class
+                            </th>
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Area
+                            </th>
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Perimeter
+                            </th>
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Major Axis
+                            </th>
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Result
+                            </th>
+
+                            <th class="text-left text-xs font-semibold text-green-700 uppercase px-6 py-4">
+                                Confidence
+                            </th>
+
                         </tr>
+
                     </thead>
 
-                    <tbody class="divide-y divide-red-50">
+                    <tbody class="divide-y divide-green-50">
 
                         <!-- Row 1 -->
-                        <tr class="hover:bg-red-50 transition">
+                        <tr class="hover:bg-green-50 transition">
                             <td class="px-6 py-4 text-sm text-gray-700">Jan 15, 2024</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">Normal</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">120/80</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">180</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">72 bpm</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">BARBUNYA</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">28395</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">610.29</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">208.18</td>
                             <td class="px-6 py-4">
                                 <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700 border border-green-200">
-                                    Low Risk
+                                    Classified
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700">96%</td>
                         </tr>
 
                         <!-- Row 2 -->
-                        <tr class="hover:bg-red-50 transition">
+                        <tr class="hover:bg-green-50 transition">
                             <td class="px-6 py-4 text-sm text-gray-700">Jan 12, 2024</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">Elevated</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">135/85</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">210</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">78 bpm</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">SEKER</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">30012</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">598.11</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">199.45</td>
                             <td class="px-6 py-4">
                                 <span class="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700 border border-yellow-200">
-                                    Moderate Risk
+                                    Uncertain
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700">91%</td>
                         </tr>
 
                         <!-- Row 3 -->
-                        <tr class="hover:bg-red-50 transition">
+                        <tr class="hover:bg-green-50 transition">
                             <td class="px-6 py-4 text-sm text-gray-700">Jan 08, 2024</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">High BP</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">150/95</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">240</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">85 bpm</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">CALI</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">31020</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">620.45</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">210.12</td>
                             <td class="px-6 py-4">
-                                <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-700 border border-red-200">
-                                    High Risk
+                                <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700 border border-green-200">
+                                    Classified
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700">84%</td>
                         </tr>
 
                         <!-- Row 4 -->
-                        <tr class="hover:bg-red-50 transition">
+                        <tr class="hover:bg-green-50 transition">
                             <td class="px-6 py-4 text-sm text-gray-700">Jan 05, 2024</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">Critical</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">160/100</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">260</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">92 bpm</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">HOROZ</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">29500</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">605.33</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">205.90</td>
                             <td class="px-6 py-4">
                                 <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-700 border border-red-200">
-                                    High Risk
+                                    Low Confidence
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-700">78%</td>
                         </tr>
 
                     </tbody>
+
                 </table>
             </div>
 
             <!-- Pagination -->
-            <div class="flex items-center justify-between px-6 py-4 border-t border-red-100 bg-red-50/40">
+            <div class="flex items-center justify-between px-6 py-4 border-t border-green-100 bg-green-50/40">
 
                 <p class="text-sm text-gray-600">
                     Showing 1-4 of 24 results
                 </p>
 
                 <div class="flex gap-2">
-                    <button class="px-3 py-1.5 text-sm text-red-500 bg-white border border-red-200 rounded hover:bg-red-50">
+
+                    <button class="px-3 py-1.5 text-sm text-green-700 bg-white border border-green-200 rounded hover:bg-green-50">
                         Prev
                     </button>
 
-                    <button class="px-3 py-1.5 text-sm text-red-500 bg-white border border-red-200 rounded hover:bg-red-50">
+                    <button class="px-3 py-1.5 text-sm text-green-700 bg-white border border-green-200 rounded hover:bg-green-50">
                         Next
                     </button>
+
                 </div>
 
             </div>

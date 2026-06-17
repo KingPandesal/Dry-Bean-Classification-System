@@ -1,7 +1,7 @@
 {% extends "main/base.html" %}
 
 {% block title %}
-Heart Risk Classifier - Settings
+Dry Bean Classifier - Settings
 {% endblock %}
 
 {% block page_title %}
@@ -15,28 +15,28 @@ Settings
     <div class="p-6 max-w-4xl mx-auto space-y-6">
 
         <!-- Profile Section -->
-        <div class="bg-white rounded-xl border border-red-100 shadow-sm p-6">
+        <div class="bg-white rounded-xl border border-green-100 shadow-sm p-6">
 
-            <h2 class="text-lg font-bold text-red-600 mb-6">
+            <h2 class="text-lg font-bold text-green-700 mb-6">
                 Profile Settings
             </h2>
 
             <div class="flex items-center gap-6 mb-6">
 
                 {% if session.get("guest") or not user %}
-                    <div class="h-20 w-20 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
-                        <span class="text-red-600 font-bold text-2xl">
+                    <div class="h-20 w-20 rounded-full bg-green-50 border border-green-100 flex items-center justify-center">
+                        <span class="text-green-700 font-bold text-2xl">
                             GU
                         </span>
                     </div>
 
                 {% elif user.avatar %}
                     <img src="{{ url_for('static', filename='uploads/' + user.avatar) }}"
-                        class="h-20 w-20 rounded-full object-cover border border-red-100 avatar-img">
+                        class="h-20 w-20 rounded-full object-cover border border-green-100 avatar-img">
 
                 {% else %}
-                    <div class="h-20 w-20 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
-                        <span class="text-red-600 font-bold text-2xl">
+                    <div class="h-20 w-20 rounded-full bg-green-50 border border-green-100 flex items-center justify-center">
+                        <span class="text-green-700 font-bold text-2xl">
                             {{ (user.name or "U")[:2].upper() }}
                         </span>
                     </div>
@@ -47,7 +47,7 @@ Settings
 
                     <button type="button"
                             id="avatar-btn"
-                            class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition shadow">
+                            class="px-4 py-2 bg-green-700 text-white text-sm rounded-lg hover:bg-green-800 transition shadow">
                         Change Avatar
                     </button>
 
@@ -63,42 +63,42 @@ Settings
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     
                     <div>
-                        <label class="block text-xs font-medium text-red-500 uppercase mb-1">
+                        <label class="block text-xs font-medium text-green-600 uppercase mb-1">
                             Full Name
                         </label>
                         <input 
                             name="name"
                             type="text" 
                             value="{{ user.name }}"
-                            class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                            class="w-full px-4 py-2.5 bg-white border border-green-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-red-500 uppercase mb-1">
+                        <label class="block text-xs font-medium text-green-600 uppercase mb-1">
                             Username
                         </label>
                         <input 
                             name="username"
                             type="text" 
                             value="{{ user.username }}"
-                            class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                            class="w-full px-4 py-2.5 bg-white border border-green-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                     </div>
 
                     <div class="md:col-span-2">
-                        <label class="block text-xs font-medium text-red-500 uppercase mb-1">
+                        <label class="block text-xs font-medium text-green-600 uppercase mb-1">
                             Email Address
                         </label>
                         <input 
                             name="email"
                             type="email" 
                             value="{{ user.email }}"
-                            class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-red-400 focus:border-red-400">
+                            class="w-full px-4 py-2.5 bg-white border border-green-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-green-500 focus:border-green-500">
                     </div>
 
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition">
+                    <button class="px-4 py-2 bg-green-700 text-white text-sm rounded-lg hover:bg-green-800 transition">
                         Save Changes
                     </button>
                 </div>
@@ -108,48 +108,47 @@ Settings
         </div>
 
         <!-- Notifications -->
-        <!-- <div class="bg-white rounded-xl border border-red-100 shadow-sm p-6">
+        <!-- <div class="bg-white rounded-xl border border-green-100 shadow-sm p-6">
 
-            <h2 class="text-lg font-bold text-red-600 mb-6">
+            <h2 class="text-lg font-bold text-green-700 mb-6">
                 Notifications
             </h2>
 
-            <div class="space-y-4"> -->
+            <div class="space-y-4">
 
-                <!-- Toggle -->
-                <!-- <div class="flex items-center justify-between py-3 border-b border-red-50">
+                <div class="flex items-center justify-between py-3 border-b border-green-50">
                     <div>
-                        <p class="text-sm text-gray-800">Email Notifications</p>
-                        <p class="text-xs text-gray-500">Receive updates via email</p>
+                        <p class="text-sm text-gray-800">Email Updates</p>
+                        <p class="text-xs text-gray-500">Receive system updates via email</p>
                     </div>
 
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" checked class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-red-400 rounded-full peer peer-checked:bg-red-500"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-green-500 rounded-full peer peer-checked:bg-green-600"></div>
                     </label>
                 </div>
 
-                <div class="flex items-center justify-between py-3 border-b border-red-50">
+                <div class="flex items-center justify-between py-3 border-b border-green-50">
                     <div>
-                        <p class="text-sm text-gray-800">Risk Alerts</p>
-                        <p class="text-xs text-gray-500">Get notified when heart risk changes</p>
+                        <p class="text-sm text-gray-800">Prediction Alerts</p>
+                        <p class="text-xs text-gray-500">Get notified when bean classification is made</p>
                     </div>
 
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" checked class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-red-400 rounded-full peer peer-checked:bg-red-500"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-green-500 rounded-full peer peer-checked:bg-green-600"></div>
                     </label>
                 </div>
 
                 <div class="flex items-center justify-between py-3">
                     <div>
-                        <p class="text-sm text-gray-800">Weekly Health Summary</p>
-                        <p class="text-xs text-gray-500">Get a weekly cardiovascular report</p>
+                        <p class="text-sm text-gray-800">Weekly Model Report</p>
+                        <p class="text-xs text-gray-500">Get weekly AI performance summary</p>
                     </div>
 
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-red-400 rounded-full peer peer-checked:bg-red-500"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-green-500 rounded-full peer peer-checked:bg-green-600"></div>
                     </label>
                 </div>
 
@@ -158,9 +157,9 @@ Settings
         </div> -->
 
         <!-- Password -->
-        <div class="bg-white rounded-xl border border-red-100 shadow-sm p-6">
+        <div class="bg-white rounded-xl border border-green-100 shadow-sm p-6">
 
-            <h2 class="text-lg font-bold text-red-600 mb-6">
+            <h2 class="text-lg font-bold text-green-700 mb-6">
                 Change Password
             </h2>
 
@@ -170,34 +169,35 @@ Settings
 
                     <input 
                         type="password" 
-                        name = "current_password"
+                        name="current_password"
                         placeholder="Current Password"
                         required
-                        class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg">
+                        class="w-full px-4 py-2.5 bg-white border border-green-200 rounded-lg">
 
                     <input 
                         type="password" 
-                        name = "new_password"
+                        name="new_password"
                         placeholder="New Password"
                         required
-                        class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg">
+                        class="w-full px-4 py-2.5 bg-white border border-green-200 rounded-lg">
 
                     <input 
                         type="password" 
-                        name = "confirm_password"
+                        name="confirm_password"
                         placeholder="Confirm Password"
                         required
-                        class="w-full px-4 py-2.5 bg-white border border-red-200 rounded-lg">
+                        class="w-full px-4 py-2.5 bg-white border border-green-200 rounded-lg">
 
                 </div>
 
                 <div class="mt-6 flex justify-end">
                     <button 
                         type="submit"
-                        class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition">
+                        class="px-4 py-2 bg-green-700 text-white text-sm rounded-lg hover:bg-green-800 transition">
                         Update Password
                     </button>
                 </div>
+
             </form>
 
         </div>
@@ -205,12 +205,12 @@ Settings
         <!-- Danger Zone -->
         <div class="bg-white rounded-xl border border-red-200 shadow-sm p-6">
 
-            <h2 class="text-lg font-bold text-red-700 mb-2">
+            <h2 class="text-lg font-bold text-red-600 mb-2">
                 Danger Zone
             </h2>
 
             <p class="text-sm text-gray-500 mb-6">
-                Deleting your account will permanently remove your medical records and predictions.
+                Deleting your account will permanently remove your prediction history and system data.
             </p>
 
             <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition">
