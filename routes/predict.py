@@ -1,11 +1,18 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
+
 from ml.model_loader import model, label_encoder
+
 import pandas as pd
 import numpy as np
 
+from models.prediction import Prediction
+from models.user import User
+from extensions import db
+
+import json
+
 predict = Blueprint("predict", __name__)
 
-# MUST MATCH TRAINING FEATURE ORDER
 FEATURE_NAMES = [
     "Area",
     "Perimeter",
@@ -52,7 +59,6 @@ def predict_bean():
             float(data["shape_factor4"]),
         ]
 
-        # ✅ convert to DataFrame (THIS FIXES WARNING)
         features_df = pd.DataFrame([features], columns=FEATURE_NAMES)
 
         # prediction
@@ -64,6 +70,28 @@ def predict_bean():
 
         # decode label
         class_name = label_encoder.inverse_transform([pred])[0]
+
+        # ============================
+        # ✅ ADD THIS: SAVE TO DATABASE
+        # ============================
+
+        username = session.get("username")
+
+        if username:
+            user = User.query.filter_by(username=username).first()
+
+            if user:
+                history = Prediction(
+                    user_id=user.id,
+                    prediction=class_name,
+                    confidence=round(confidence, 2),
+                    input_data=json.dumps(data)
+                )
+
+                db.session.add(history)
+                db.session.commit()
+
+        # ============================
 
         return jsonify({
             "success": True,

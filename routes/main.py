@@ -7,6 +7,7 @@ from flask import (
 )
 
 from models.user import User
+from models.prediction import Prediction
 
 main = Blueprint(
     "main",
@@ -61,9 +62,16 @@ def history():
         username=session["username"]
     ).first()
 
+    predictions = Prediction.query.filter_by(
+        user_id=user.id
+    ).order_by(
+        Prediction.created_at.desc()
+    ).all()
+
     return render_template(
         "main/history.html",
-        user=user
+        user=user,
+        predictions=predictions
     )
 
 # Settings Route

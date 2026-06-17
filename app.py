@@ -22,12 +22,14 @@ from routes.auth import auth
 from routes.main import main
 from routes.account import account
 from routes.predict import predict
+from routes.history import history
 
 # Register blueprints
 app.register_blueprint(auth)
 app.register_blueprint(main)
 app.register_blueprint(account)
 app.register_blueprint(predict)
+app.register_blueprint(history)
 
 from flask import render_template
 
