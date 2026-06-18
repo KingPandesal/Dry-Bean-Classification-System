@@ -99,10 +99,14 @@ Prediction History
                         {% for p in predictions %}
 
                         <tr 
-                            class="hover:bg-green-50 transition" 
+                            class="hover:bg-green-50 transition cursor-pointer"
+                            title="Click to view details"
                             data-class="{{ p.prediction }}"
                             data-confidence="{{ p.confidence }}"
-                            data-date="{{ p.created_at.timestamp() }}">
+                            data-date="{{ p.created_at.timestamp() }}"
+                            onclick="openPredictionModalHistory(this)"
+                            data-input='{{ p.input_data | e }}'
+                        >
 
                             <td class="px-6 py-4 text-sm text-gray-700">
                                 {{ p.created_at.strftime('%b %d, %Y') }}

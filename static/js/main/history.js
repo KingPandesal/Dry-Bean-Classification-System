@@ -135,3 +135,101 @@ document.getElementById("searchInput").addEventListener("input", function () {
 window.onload = () => {
     filterTable();
 };
+
+function openPredictionModalHistory(row) {
+    const prediction = row.dataset.class;
+    const confidence = row.dataset.confidence;
+    const date = row.dataset.date;
+    const input = JSON.parse(row.dataset.input);
+
+    // Human-readable labels dictionary mapping JSON keys to pretty names
+    const labelMapping = {
+        'area': 'Area', 'perimeter': 'Perimeter', 'major_axis_length': 'Major Axis', 'minor_axis_length': 'Minor Axis',
+        'aspect_ratio': 'Aspect Ratio', 'eccentricity': 'Eccentricity', 'convex_area': 'Convex Area', 'equiv_diameter': 'Equiv Diameter',
+        'extent': 'Extent', 'solidity': 'Solidity', 'roundness': 'Roundness', 'compactness': 'Compactness',
+        'shape_factor1': 'Factor 1', 'shape_factor2': 'Factor 2', 'shape_factor3': 'Factor 3', 'shape_factor4': 'Factor 4'
+    };
+
+    // Helper function to build clean grid metrics inside the cards
+    const renderMetric = (key) => {
+        if (input[key] === undefined) return '';
+        const value = typeof input[key] === 'number' ? Number(input[key]).toLocaleString(undefined, {maximumFractionDigits: 4}) : input[key];
+        return `
+            <div class="bg-white/80 px-3 py-2 rounded-lg border border-slate-100 flex flex-col">
+                <span class="text-[11px] font-medium text-slate-400 truncate">${labelMapping[key] || key}</span>
+                <span class="text-sm font-semibold text-slate-800 mt-0.5">${value}</span>
+            </div>
+        `;
+    };
+
+    const html = `
+        <div class="space-y-5 max-h-[75vh] overflow-y-auto px-1">
+            
+            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 p-4 rounded-xl flex items-center justify-between shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-xl shadow-md shadow-emerald-600/10">
+                        🫘
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Classified Result</span>
+                        <h3 class="text-xl font-black text-emerald-900 leading-tight">${prediction}</h3>
+                        <span class="text-xs text-slate-400 block mt-0.5">${date}</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Confidence</span>
+                    <span class="text-xl font-extrabold text-emerald-600">${confidence}%</span>
+                </div>
+            </div>
+
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 pl-1 -mb-2">Historical Features</div>
+
+            <div class="border border-emerald-100 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                <div class="border-b border-emerald-200 pb-1">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-900">📏 Size & Dimensions</h4>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    ${renderMetric('area')}
+                    ${renderMetric('perimeter')}
+                    ${renderMetric('major_axis_length')}
+                    ${renderMetric('minor_axis_length')}
+                </div>
+            </div>
+
+            <div class="border border-emerald-100 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                <div class="border-b border-emerald-200 pb-1">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-900">⬡ Shape Attributes</h4>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    ${renderMetric('aspect_ratio')}
+                    ${renderMetric('eccentricity')}
+                    ${renderMetric('convex_area')}
+                    ${renderMetric('equiv_diameter')}
+                </div>
+            </div>
+
+            <div class="border border-emerald-100 bg-emerald-50/40 p-4 rounded-xl space-y-3">
+                <div class="border-b border-emerald-200 pb-1">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-900">🧬 Geometry & Factors</h4>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    ${renderMetric('extent')}
+                    ${renderMetric('solidity')}
+                    ${renderMetric('roundness')}
+                    ${renderMetric('compactness')}
+                </div>
+                <div class="pt-2 border-t border-dashed border-emerald-200/60">
+                    <div class="grid grid-cols-4 gap-1.5">
+                        ${renderMetric('shape_factor1')}
+                        ${renderMetric('shape_factor2')}
+                        ${renderMetric('shape_factor3')}
+                        ${renderMetric('shape_factor4')}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    `;
+
+    openModal("Prediction Details", html);
+}

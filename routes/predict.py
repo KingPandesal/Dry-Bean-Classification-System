@@ -72,7 +72,7 @@ def predict_bean():
         class_name = label_encoder.inverse_transform([pred])[0]
 
         # ============================
-        # ✅ ADD THIS: SAVE TO DATABASE
+        # SAVE TO DATABASE
         # ============================
 
         username = session.get("username")
