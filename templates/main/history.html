@@ -17,22 +17,33 @@ Prediction History
         <!-- Filters -->
         <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
 
-            <div class="flex gap-2">
-                <button class="px-4 py-2 bg-green-700 text-white text-sm rounded-lg shadow">
-                    All
-                </button>
+            <div class="flex gap-2 flex-wrap">
 
-                <button class="px-4 py-2 bg-white text-green-700 text-sm rounded-lg border border-green-200 hover:bg-green-50 transition">
-                    BARBUNYA
-                </button>
+                <!-- CLASS FILTER (dropdown) -->
+                <select id="classFilter"
+                    onchange="filterTable()"
+                    class="px-4 py-2 bg-white border border-green-200 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500">
 
-                <button class="px-4 py-2 bg-white text-green-700 text-sm rounded-lg border border-green-200 hover:bg-green-50 transition">
-                    CALI
-                </button>
+                    <option value="ALL">All Classes</option>
+                    <option value="BARBUNYA">BARBUNYA</option>
+                    <option value="BOMBAY">BOMBAY</option>
+                    <option value="CALI">CALI</option>
+                    <option value="DERMASON">DERMASON</option>
+                    <option value="HOROZ">HOROZ</option>
+                    <option value="SEKER">SEKER</option>
+                    <option value="SIRA">SIRA</option>
+                </select>
 
-                <button class="px-4 py-2 bg-white text-green-700 text-sm rounded-lg border border-green-200 hover:bg-green-50 transition">
-                    SEKER
-                </button>
+                <select id="sortFilter"
+                    onchange="filterTable()"
+                    class="px-4 py-2 bg-white border border-green-200 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="confidence_high">Confidence (High → Low)</option>
+                    <option value="confidence_low">Confidence (Low → High)</option>
+
+                </select>
             </div>
 
             <div class="relative">
@@ -46,7 +57,7 @@ Prediction History
 
                 </svg>
 
-                <input type="text" placeholder="Search predictions..."
+                <input id="searchInput" type="text" placeholder="Search predictions..."
                     class="pl-10 pr-4 py-2 bg-white border border-green-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm w-full sm:w-64">
 
             </div>
@@ -87,7 +98,11 @@ Prediction History
 
                         {% for p in predictions %}
 
-                        <tr class="hover:bg-green-50 transition">
+                        <tr 
+                            class="hover:bg-green-50 transition" 
+                            data-class="{{ p.prediction }}"
+                            data-confidence="{{ p.confidence }}"
+                            data-date="{{ p.created_at.timestamp() }}">
 
                             <td class="px-6 py-4 text-sm text-gray-700">
                                 {{ p.created_at.strftime('%b %d, %Y') }}
@@ -160,5 +175,7 @@ Prediction History
     </div>
 
 </main>
+
+<script src="{{ url_for('static', filename='js/main/history.js') }}"></script>
 
 {% endblock %}
