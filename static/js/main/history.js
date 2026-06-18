@@ -92,16 +92,22 @@ function prevPage() {
 }
 
 function updatePaginationUI() {
-    const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+    const info = document.getElementById("paginationInfo");
+    const noDataRow = document.getElementById("noDataRow");
 
-    const info = document.querySelector("#paginationInfo");
+    const isEmpty = noDataRow && noDataRow.offsetParent !== null;
 
-    if (info) {
-        const start = (currentPage - 1) * rowsPerPage + 1;
-        const end = Math.min(currentPage * rowsPerPage, filteredRows.length);
-
-        info.textContent = `Showing ${start}-${end} of ${filteredRows.length} results`;
+    if (isEmpty || filteredRows.length === 0) {
+        if (info) info.style.display = "none";
+        return;
     }
+
+    if (info) info.style.display = "block";
+
+    const start = (currentPage - 1) * rowsPerPage + 1;
+    const end = Math.min(currentPage * rowsPerPage, filteredRows.length);
+
+    info.textContent = `Showing ${start}-${end} of ${filteredRows.length} results`;
 }
 
 function updatePaginationButtons() {
@@ -123,13 +129,7 @@ function updatePaginationButtons() {
 
 // Search functionality
 document.getElementById("searchInput").addEventListener("input", function () {
-    const query = this.value.toLowerCase();
-    const rows = allRows;
-
-    rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(query) ? "" : "none";
-    });
+    filterTable();
 });
 
 window.onload = () => {
