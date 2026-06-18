@@ -139,10 +139,35 @@ window.onload = () => {
 function openPredictionModalHistory(row) {
     const prediction = row.dataset.class;
     const confidence = row.dataset.confidence;
-    const date = row.dataset.date;
+    const rawDate = row.dataset.date; // Renamed to rawDate
     const input = JSON.parse(row.dataset.input);
 
-    // Human-readable labels dictionary mapping JSON keys to pretty names
+    // ✨ UI/UX Date Formatter Helper
+    // ✨ UI/UX Date Formatter Helper (Fixed for Unix Timestamps)
+    let formattedDate = rawDate;
+    try {
+        // Convert string timestamp to a number
+        const timestampInSeconds = parseFloat(rawDate);
+        
+        // Multiply by 1000 to convert seconds to JavaScript milliseconds
+        const parsedDate = new Date(timestampInSeconds * 1000);
+        
+        // Validates if it successfully converted to a real date object
+        if (!isNaN(parsedDate.getTime())) {
+            formattedDate = new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }).format(parsedDate);
+        }
+    } catch (e) {
+        // Fallback to raw string if parsing fails entirely
+        formattedDate = rawDate;
+    }
+
     const labelMapping = {
         'area': 'Area', 'perimeter': 'Perimeter', 'major_axis_length': 'Major Axis', 'minor_axis_length': 'Minor Axis',
         'aspect_ratio': 'Aspect Ratio', 'eccentricity': 'Eccentricity', 'convex_area': 'Convex Area', 'equiv_diameter': 'Equiv Diameter',
@@ -150,7 +175,6 @@ function openPredictionModalHistory(row) {
         'shape_factor1': 'Factor 1', 'shape_factor2': 'Factor 2', 'shape_factor3': 'Factor 3', 'shape_factor4': 'Factor 4'
     };
 
-    // Helper function to build clean grid metrics inside the cards
     const renderMetric = (key) => {
         if (input[key] === undefined) return '';
         const value = typeof input[key] === 'number' ? Number(input[key]).toLocaleString(undefined, {maximumFractionDigits: 4}) : input[key];
@@ -173,7 +197,10 @@ function openPredictionModalHistory(row) {
                     <div>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 block">Classified Result</span>
                         <h3 class="text-xl font-black text-emerald-900 leading-tight">${prediction}</h3>
-                        <span class="text-xs text-slate-400 block mt-0.5">${date}</span>
+                        
+                        <span class="text-[11px] font-medium text-slate-400 flex items-center gap-1 mt-1 bg-white/60 px-1.5 py-0.5 rounded border border-slate-100 w-fit">
+                            ${formattedDate}
+                        </span>
                     </div>
                 </div>
                 <div class="text-right">
@@ -226,6 +253,12 @@ function openPredictionModalHistory(row) {
                         ${renderMetric('shape_factor4')}
                     </div>
                 </div>
+            </div>
+
+            <div class="flex justify-end pt-2">
+                <button onclick="closeModal()" class="px-6 py-2.5 text-sm bg-amber-800 text-white font-medium rounded-lg hover:bg-amber-900 shadow transition">
+                    Dismiss View
+                </button>
             </div>
 
         </div>
