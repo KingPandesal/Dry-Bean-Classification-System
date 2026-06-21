@@ -228,6 +228,55 @@ function attachPredictionHandler() {
             const result = await res.json();
 
             if (result.success) {
+                const conf = parseFloat(result.confidence);
+                let tierHTML = '';
+                
+                if (conf >= 90) {
+                    tierHTML = `
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3 space-y-1">
+                            <p class="text-xs font-bold text-green-900">
+                                90-100% — Very High
+                            </p>
+                            <p class="text-xs text-green-700">
+                                Very strong match with learned patterns.
+                            </p>
+                        </div>
+                    `;
+                } else if (conf >= 75) {
+                    tierHTML = `
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 space-y-1">
+                            <p class="text-xs font-bold text-yellow-900">
+                                75-89% — High
+                            </p>
+                            <p class="text-xs text-yellow-700">
+                                Input characteristics strongly matched the prediction.
+                            </p>
+                        </div>
+                    `;
+                } else if (conf >= 60) {
+                    tierHTML = `
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 space-y-1">
+                            <p class="text-xs font-bold text-orange-900">
+                                60-74% — Moderate
+                            </p>
+                            <p class="text-xs text-orange-700">
+                                Prediction is acceptable but may overlap with other classes.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    tierHTML = `
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-3 space-y-1">
+                            <p class="text-xs font-bold text-red-900">
+                                Below 60% — Low
+                            </p>
+                            <p class="text-xs text-red-700">
+                                Prediction may be less reliable. Verify measurements.
+                            </p>
+                        </div>
+                    `;
+                }
+                
                 openModal(
                     "Prediction Result",
                     `
@@ -243,6 +292,7 @@ function attachPredictionHandler() {
                                 Confidence: ${result.confidence}%
                             </p>
                         </div>
+                        ${tierHTML}
                         <button onclick="closeModal()" class="mt-2 px-6 py-2 bg-amber-800 text-white text-sm rounded-lg hover:bg-amber-900 transition">
                             Close
                         </button>

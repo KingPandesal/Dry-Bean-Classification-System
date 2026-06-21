@@ -190,6 +190,71 @@ function openPredictionModalHistory(row) {
         'shape_factor1': 'Factor 1', 'shape_factor2': 'Factor 2', 'shape_factor3': 'Factor 3', 'shape_factor4': 'Factor 4'
     };
 
+    // Determine confidence tier and details
+    let confidenceTierHTML = '';
+    const confValue = parseFloat(confidence);
+    if (confValue >= 90) {
+        confidenceTierHTML = `
+            <div class="bg-green-50 border border-green-200 rounded-xl p-4 space-y-2">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wide text-green-700">Very High</p>
+                        <p class="text-sm font-semibold text-green-900 mt-0.5">90-100%</p>
+                    </div>
+                    <div class="w-10 h-10 bg-green-200 rounded-lg flex items-center justify-center text-lg">✓</div>
+                </div>
+                <p class="text-xs text-green-700 leading-relaxed">
+                    The model showed very strong confidence in the predicted bean variety. The input characteristics closely matched patterns learned during training.
+                </p>
+            </div>
+        `;
+    } else if (confValue >= 75) {
+        confidenceTierHTML = `
+            <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 space-y-2">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wide text-yellow-700">High</p>
+                        <p class="text-sm font-semibold text-yellow-900 mt-0.5">75-89%</p>
+                    </div>
+                    <div class="w-10 h-10 bg-yellow-200 rounded-lg flex items-center justify-center text-lg">→</div>
+                </div>
+                <p class="text-xs text-yellow-700 leading-relaxed">
+                    The model showed high confidence in the prediction. The input characteristics were generally consistent with learned classification patterns.
+                </p>
+            </div>
+        `;
+    } else if (confValue >= 60) {
+        confidenceTierHTML = `
+            <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 space-y-2">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wide text-orange-700">Moderate</p>
+                        <p class="text-sm font-semibold text-orange-900 mt-0.5">60-74%</p>
+                    </div>
+                    <div class="w-10 h-10 bg-orange-200 rounded-lg flex items-center justify-center text-lg">◐</div>
+                </div>
+                <p class="text-xs text-orange-700 leading-relaxed">
+                    The model generated a moderately confident prediction. Some input characteristics may overlap with other bean classes.
+                </p>
+            </div>
+        `;
+    } else {
+        confidenceTierHTML = `
+            <div class="bg-red-50 border border-red-200 rounded-xl p-4 space-y-2">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wide text-red-700">Low</p>
+                        <p class="text-sm font-semibold text-red-900 mt-0.5">Below 60%</p>
+                    </div>
+                    <div class="w-10 h-10 bg-red-200 rounded-lg flex items-center justify-center text-lg">!</div>
+                </div>
+                <p class="text-xs text-red-700 leading-relaxed">
+                    The model showed low confidence in the prediction. Input values may be ambiguous, unusual, or outside typical training patterns. Consider verifying the measurements.
+                </p>
+            </div>
+        `;
+    }
+
     const renderMetric = (key) => {
         if (input[key] === undefined) return '';
         const value = typeof input[key] === 'number' ? Number(input[key]).toLocaleString(undefined, {maximumFractionDigits: 4}) : input[key];
@@ -223,6 +288,8 @@ function openPredictionModalHistory(row) {
                     <span class="text-xl font-extrabold text-emerald-600">${confidence}%</span>
                 </div>
             </div>
+
+            ${confidenceTierHTML}
 
             <div class="text-xs font-bold uppercase tracking-widest text-slate-400 pl-1 -mb-2">Historical Features</div>
 
