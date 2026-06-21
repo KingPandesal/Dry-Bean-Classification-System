@@ -255,12 +255,6 @@ function openPredictionModalHistory(row) {
                 </div>
             </div>
 
-            <div class="flex justify-end pt-2">
-                <button onclick="closeModal()" class="px-6 py-2.5 text-sm bg-amber-800 text-white font-medium rounded-lg hover:bg-amber-900 shadow transition">
-                    Dismiss View
-                </button>
-            </div>
-
         </div>
     `;
 

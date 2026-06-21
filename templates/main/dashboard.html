@@ -22,8 +22,24 @@ Bean Classification Dashboard
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-slate-500 text-sm">Total Predictions</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">24</p>
-                    <p class="text-xs text-green-600 mt-1">+12% this month</p>
+                    <p class="text-2xl font-bold text-slate-900 mt-1">
+                        {{ stats.total_predictions }}
+                    </p>
+                    <p class="text-xs text-green-600 mt-1">this month</p>
+
+                    <!-- <p class="text-xs mt-1
+                        {% if stats.monthly_growth >= 0 %}
+                            text-green-600
+                        {% else %}
+                            text-red-600
+                        {% endif %}">
+
+                        {% if stats.monthly_growth >= 0 %}
+                            ↑ {{ stats.monthly_growth }}% from last month
+                        {% else %}
+                            ↓ {{ stats.monthly_growth | abs }}% from last month
+                        {% endif %}
+                    </p> -->
                 </div>
 
                 <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
@@ -36,8 +52,8 @@ Bean Classification Dashboard
         <div class="bg-white rounded-xl border border-green-100 p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-slate-500 text-sm">Latest Bean Class</p>
-                    <p class="text-2xl font-bold text-green-700 mt-1">BARBUNYA</p>
+                    <p class="text-slate-500 text-sm">Moost Predicted Class</p>
+                    <p class="text-2xl font-bold text-green-700 mt-1">{{ stats.most_predicted }}</p>
                     <p class="text-xs text-slate-500 mt-1">Last prediction: recent</p>
                 </div>
 
@@ -51,8 +67,8 @@ Bean Classification Dashboard
         <div class="bg-white rounded-xl border border-green-100 p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-slate-500 text-sm">Avg. Confidence</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">94%</p>
+                    <p class="text-slate-500 text-sm">Model Accuracy</p>
+                    <p class="text-2xl font-bold text-slate-900 mt-1">{{ stats.model_accuracy }}%</p>
                     <p class="text-xs text-green-600 mt-1">High model accuracy</p>
                 </div>
 

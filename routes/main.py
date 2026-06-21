@@ -8,6 +8,7 @@ from flask import (
 
 from models.user import User
 from models.prediction import Prediction
+from routes.dashboard import get_dashboard_data
 
 main = Blueprint(
     "main",
@@ -32,20 +33,22 @@ def home():
 def dashboard():
 
     if "username" not in session and not session.get("guest"):
-        return redirect(
-            url_for("auth.login_page")
-        )
+        return redirect(url_for("auth.login_page"))
 
     user = None
+    stats = None
 
     if "username" in session:
         user = User.query.filter_by(
             username=session["username"]
         ).first()
 
+        stats = get_dashboard_data(user.id)
+
     return render_template(
         "main/dashboard.html",
-        user=user
+        user=user,
+        stats=stats
     )
 
 # History Route
