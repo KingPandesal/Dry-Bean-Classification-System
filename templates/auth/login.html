@@ -52,6 +52,8 @@
         </div>
         {% endif %}
 
+        {% include "partials/toasts.html" %}
+
         <!-- FORM -->
         <form id="auth-form" action="{{ url_for('auth.login') }}" method="POST" class="space-y-6">
 
@@ -63,6 +65,7 @@
 
                 <input name="username" type="text" required
                     placeholder="Enter your username"
+                    value="{{ form.username if form else '' }}"
                     class="mt-1 block w-full px-4 py-3 bg-white border border-green-100 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition">
             </div>
 

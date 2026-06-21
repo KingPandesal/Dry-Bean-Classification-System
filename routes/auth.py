@@ -1,5 +1,6 @@
 from flask import (
     Blueprint,
+    flash,
     render_template,
     request,
     redirect,
@@ -45,14 +46,31 @@ def login_page():
 
 @auth.route("/login", methods=["POST"])
 def login():
-    username = request.form["username"]
-    password = request.form["password"]
+    username = request.form.get("username", "").strip()
+    password = request.form.get("password", "")
+
+    if not username or not password:
+        return render_template(
+            "auth/login.html",
+            error="Please enter both username and password.",
+            form=request.form
+        )
 
     user = User.query.filter_by(
         username=username
     ).first()
 
-    if user and user.check_password(password):
+    if not user:
+        flash(
+            "No account found for that username. Create one to continue.",
+            "warning"
+        )
+
+        return redirect(
+            url_for("auth.register_page")
+        )
+
+    if user.check_password(password):
 
         session["username"] = username
 
@@ -60,8 +78,10 @@ def login():
             url_for("main.dashboard")
         )
 
-    return redirect(
-        url_for("auth.login_page")
+    return render_template(
+        "auth/login.html",
+        error="Incorrect password. Please try again.",
+        form=request.form
     )
 
 # Register Page Route
