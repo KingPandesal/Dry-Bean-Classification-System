@@ -36,7 +36,6 @@ def dashboard():
         return redirect(url_for("auth.login_page"))
 
     user = None
-    stats = None
 
     if "username" in session:
         user = User.query.filter_by(
@@ -44,6 +43,19 @@ def dashboard():
         ).first()
 
         stats = get_dashboard_data(user.id)
+
+    else:
+        stats = {
+            "total_predictions": 0,
+            "most_predicted": "-",
+            "average_confidence": 0,
+            "model_accuracy": 92,
+            "monthly_growth": 0,
+            "class_labels": [],
+            "class_counts": [],
+            "confidence_dates": [],
+            "confidence_values": []
+        }
 
     return render_template(
         "main/dashboard.html",

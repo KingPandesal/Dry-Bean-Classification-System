@@ -51,23 +51,50 @@ def get_dashboard_data(user_id):
             "most_predicted": "-",
             "average_confidence": 0,
             "model_accuracy": 92,
-            "monthly_growth": monthly_growth
+            "monthly_growth": monthly_growth,
+            "class_labels": [],
+            "class_counts": [],
+            "confidence_dates": [],
+            "confidence_values": []
         }
+        
+    # ------------------------
+    # Bean Distribution
+    # ------------------------
 
-    # ---------- Most Predicted ----------
-    classes = [p.prediction for p in predictions]
-    most_predicted = Counter(classes).most_common(1)[0][0]
+    counter = Counter(p.prediction for p in predictions)
 
-    # ---------- Average Confidence ----------
-    average_confidence = round(
-        sum(p.confidence for p in predictions) / total_predictions,
-        2
-    )
+    class_labels = list(counter.keys())
+    class_counts = list(counter.values())
+
+    # ------------------------
+    # Confidence Trend
+    # ------------------------
+
+    confidence_dates = [
+        p.created_at.strftime("%b %d")
+        for p in predictions
+    ]
+
+    confidence_values = [
+        p.confidence
+        for p in predictions
+    ]
 
     return {
         "total_predictions": total_predictions,
-        "most_predicted": most_predicted,
-        "average_confidence": average_confidence,
+        "most_predicted": counter.most_common(1)[0][0],
+        "average_confidence": round(
+            sum(p.confidence for p in predictions) / total_predictions,
+            2
+        ),
         "model_accuracy": 92,
+
+        "class_labels": class_labels,
+        "class_counts": class_counts,
+
+        "confidence_dates": confidence_dates,
+        "confidence_values": confidence_values,
+
         "monthly_growth": monthly_growth
     }

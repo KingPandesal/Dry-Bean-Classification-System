@@ -12,265 +12,117 @@ Bean Classification Dashboard
 
 <main>
 
-<div class="p-6 space-y-6">
+    <div class="p-6 space-y-6">
 
-    <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <!-- Total Predictions -->
-        <div class="bg-white rounded-xl border border-green-100 p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-slate-500 text-sm">Total Predictions</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">
-                        {{ stats.total_predictions }}
-                    </p>
-                    <p class="text-xs text-green-600 mt-1">this month</p>
-
-                    <!-- <p class="text-xs mt-1
-                        {% if stats.monthly_growth >= 0 %}
-                            text-green-600
-                        {% else %}
-                            text-red-600
-                        {% endif %}">
-
-                        {% if stats.monthly_growth >= 0 %}
-                            ↑ {{ stats.monthly_growth }}% from last month
-                        {% else %}
-                            ↓ {{ stats.monthly_growth | abs }}% from last month
-                        {% endif %}
-                    </p> -->
-                </div>
-
-                <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    🫘
-                </div>
-            </div>
-        </div>
-
-        <!-- Current Prediction -->
-        <div class="bg-white rounded-xl border border-green-100 p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-slate-500 text-sm">Moost Predicted Class</p>
-                    <p class="text-2xl font-bold text-green-700 mt-1">{{ stats.most_predicted }}</p>
-                    <p class="text-xs text-slate-500 mt-1">Last prediction: recent</p>
-                </div>
-
-                <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    🌱
-                </div>
-            </div>
-        </div>
-
-        <!-- Avg Confidence -->
-        <div class="bg-white rounded-xl border border-green-100 p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-slate-500 text-sm">Model Accuracy</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">{{ stats.model_accuracy }}%</p>
-                    <p class="text-xs text-green-600 mt-1">High model accuracy</p>
-                </div>
-
-                <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    🤖
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Input Form + Result -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        <!-- Input Form -->
-        <div class="bg-white rounded-xl border border-green-100 p-6">
-            <h2 class="text-xl font-bold text-slate-900 mb-6">
-                New Bean Classification
-            </h2>
-
-            <form action="#" method="POST" class="space-y-5">
-
-                <div class="grid grid-cols-2 gap-4">
-
+            <!-- Total Predictions -->
+            <div class="bg-white rounded-xl border border-green-100 p-6">
+                <div class="flex items-center justify-between">
                     <div>
-                        <label class="text-xs text-slate-500 uppercase">Area</label>
-                        <input type="number" placeholder="28395"
-                            class="w-full mt-1 px-4 py-2.5 border border-green-100 rounded-lg focus:ring-2 focus:ring-green-600">
+                        <p class="text-slate-500 text-sm">Total Predictions</p>
+                        <p class="text-2xl font-bold text-slate-900 mt-1">
+                            {{ stats.total_predictions }}
+                        </p>
+                        <p class="text-xs text-green-600 mt-1">this month</p>
+
+                        <!-- <p class="text-xs mt-1
+                            {% if stats.monthly_growth >= 0 %}
+                                text-green-600
+                            {% else %}
+                                text-red-600
+                            {% endif %}">
+
+                            {% if stats.monthly_growth >= 0 %}
+                                ↑ {{ stats.monthly_growth }}% from last month
+                            {% else %}
+                                ↓ {{ stats.monthly_growth | abs }}% from last month
+                            {% endif %}
+                        </p> -->
                     </div>
 
-                    <div>
-                        <label class="text-xs text-slate-500 uppercase">Perimeter</label>
-                        <input type="text" placeholder="610.29"
-                            class="w-full mt-1 px-4 py-2.5 border border-green-100 rounded-lg focus:ring-2 focus:ring-green-600">
+                    <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
+                        🫘
                     </div>
-
                 </div>
-
-                <div class="grid grid-cols-2 gap-4">
-
-                    <div>
-                        <label class="text-xs text-slate-500 uppercase">Major Axis</label>
-                        <input type="number" placeholder="208.18"
-                            class="w-full mt-1 px-4 py-2.5 border border-green-100 rounded-lg focus:ring-2 focus:ring-green-600">
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-500 uppercase">Minor Axis</label>
-                        <input type="number" placeholder="173.88"
-                            class="w-full mt-1 px-4 py-2.5 border border-green-100 rounded-lg focus:ring-2 focus:ring-green-600">
-                    </div>
-
-                </div>
-
-                <div>
-                    <label class="text-xs text-slate-500 uppercase">Shape Factor</label>
-                    <input type="text" placeholder="Compactness / Roundness"
-                        class="w-full mt-1 px-4 py-2.5 border border-green-100 rounded-lg focus:ring-2 focus:ring-green-600">
-                </div>
-
-                <button type="submit"
-                    class="w-full bg-green-700 hover:bg-green-800 text-white py-3 rounded-lg font-medium transition">
-                    Predict Bean Class
-                </button>
-
-            </form>
-        </div>
-
-        <!-- Result -->
-        <div class="bg-white rounded-xl border border-green-100 p-6">
-
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold text-slate-900">Latest Prediction</h2>
-
-                <span class="px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-medium">
-                    CLASSIFIED
-                </span>
             </div>
 
-            <div class="text-center py-8">
+            <!-- Current Prediction -->
+            <div class="bg-white rounded-xl border border-green-100 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-slate-500 text-sm">Most Predicted Class</p>
+                        <p class="text-2xl font-bold text-green-700 mt-1">{{ stats.most_predicted }}</p>
+                        <p class="text-xs text-slate-500 mt-1">Last prediction: recent</p>
+                    </div>
 
-                <div class="h-24 w-24 mx-auto rounded-full bg-green-50 border-4 border-green-100 flex items-center justify-center">
-                    <span class="text-3xl font-bold text-green-700">96%</span>
+                    <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
+                        🌱
+                    </div>
                 </div>
+            </div>
 
-                <h3 class="mt-6 text-2xl font-bold text-slate-900">
-                    BARBUNYA
+            <!-- Avg Confidence -->
+            <div class="bg-white rounded-xl border border-green-100 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-slate-500 text-sm">Model Accuracy</p>
+                        <p class="text-2xl font-bold text-slate-900 mt-1">{{ stats.model_accuracy }}%</p>
+                        <p class="text-xs text-green-600 mt-1">High model accuracy</p>
+                    </div>
+
+                    <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
+                        🤖
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Analytics -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Bean Distribution -->
+            <div class="bg-white rounded-xl border border-green-100 p-6">
+
+                <h3 class="text-lg font-semibold text-slate-800 mb-4">
+                    Bean Class Distribution
                 </h3>
 
-                <p class="mt-2 text-slate-500">
-                    The model predicts this bean belongs to the Barbunya class based on its morphology.
-                </p>
-
-            </div>
-
-            <!-- Progress -->
-            <div class="space-y-4">
-
-                <div>
-                    <div class="flex justify-between text-sm mb-2">
-                        <span class="text-slate-500">Shape Accuracy</span>
-                        <span class="text-slate-900">95%</span>
-                    </div>
-                    <div class="h-2 bg-green-100 rounded-full overflow-hidden">
-                        <div class="h-full w-[95%] bg-green-500"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex justify-between text-sm mb-2">
-                        <span class="text-slate-500">Feature Consistency</span>
-                        <span class="text-slate-900">92%</span>
-                    </div>
-                    <div class="h-2 bg-green-100 rounded-full overflow-hidden">
-                        <div class="h-full w-[92%] bg-green-400"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex justify-between text-sm mb-2">
-                        <span class="text-slate-500">Model Confidence</span>
-                        <span class="text-slate-900">88%</span>
-                    </div>
-                    <div class="h-2 bg-green-100 rounded-full overflow-hidden">
-                        <div class="h-full w-[88%] bg-green-600"></div>
-                    </div>
+                <div class="flex justify-center items-center h-64">
+                    <canvas id="beanChart"></canvas>
                 </div>
 
             </div>
 
-            <!-- Recommendation -->
-            <div class="mt-8 p-4 rounded-lg bg-green-50 border border-green-100">
-                <h4 class="text-sm font-semibold text-green-700 mb-2">
-                    Recommendation
-                </h4>
+            <!-- Confidence -->
+            <div class="bg-white rounded-xl border border-green-100 p-6">
 
-                <p class="text-sm text-slate-600">
-                    This bean shows strong morphological consistency. Suitable for classification as high-quality dry bean sample.
-                </p>
+                <h3 class="text-lg font-semibold text-slate-800 mb-4">
+                    Confidence Trend
+                </h3>
+
+                <canvas id="confidenceChart"></canvas>
+
             </div>
+
+        </div>
 
         </div>
 
     </div>
-
-    <!-- History -->
-    <div class="bg-white rounded-xl border border-green-100 overflow-hidden">
-
-        <div class="px-6 py-4 border-b border-green-100">
-            <h2 class="text-xl font-bold text-slate-900">
-                Recent Bean Classifications
-            </h2>
-        </div>
-
-        <div class="overflow-x-auto">
-            <table class="w-full">
-
-                <thead>
-                    <tr class="border-b border-green-100">
-                        <th class="text-left px-6 py-4 text-xs text-slate-500 uppercase">Date</th>
-                        <th class="text-left px-6 py-4 text-xs text-slate-500 uppercase">Bean Class</th>
-                        <th class="text-left px-6 py-4 text-xs text-slate-500 uppercase">Confidence</th>
-                        <th class="text-left px-6 py-4 text-xs text-slate-500 uppercase">Area</th>
-                        <th class="text-left px-6 py-4 text-xs text-slate-500 uppercase">Perimeter</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr class="border-b border-green-50 hover:bg-green-50/40">
-                        <td class="px-6 py-4">June 12, 2026</td>
-                        <td class="px-6 py-4 text-green-700 font-medium">BARBUNYA</td>
-                        <td class="px-6 py-4">92%</td>
-                        <td class="px-6 py-4">28395</td>
-                        <td class="px-6 py-4">610.29</td>
-                    </tr>
-
-                    <tr class="border-b border-green-50 hover:bg-green-50/40">
-                        <td class="px-6 py-4">June 10, 2026</td>
-                        <td class="px-6 py-4 text-yellow-600 font-medium">SEKER</td>
-                        <td class="px-6 py-4">84%</td>
-                        <td class="px-6 py-4">30012</td>
-                        <td class="px-6 py-4">598.11</td>
-                    </tr>
-
-                    <tr class="hover:bg-green-50/40">
-                        <td class="px-6 py-4">June 08, 2026</td>
-                        <td class="px-6 py-4 text-green-600 font-medium">CALI</td>
-                        <td class="px-6 py-4">73%</td>
-                        <td class="px-6 py-4">31020</td>
-                        <td class="px-6 py-4">620.45</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-        </div>
-
-    </div>
-
-</div>
 
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const dashboardData = JSON.parse('{{ stats | tojson | safe }}');
+
+</script>
+
+<script src="{{ url_for('static', filename='js/main/dashboard.js') }}"></script>
 
 {% endblock %}
