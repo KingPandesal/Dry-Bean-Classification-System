@@ -11,20 +11,35 @@ document.addEventListener("DOMContentLoaded", () => {
 // Filter, Sort, & Pagination functionality
 function filterTable() {
     const classValue = document.getElementById("classFilter").value;
+    const confidenceValue = document.getElementById("confidenceFilter").value;
     const sortValue = document.getElementById("sortFilter").value;
     const searchValue = document.getElementById("searchInput")?.value.toLowerCase() || "";
 
     let filtered = allRows.filter(row => {
         const rowClass = row.dataset.class;
+        const rowConfidence = parseFloat(row.dataset.confidence);
         const text = row.innerText.toLowerCase();
 
         const matchClass =
             classValue === "ALL" || rowClass === classValue;
 
+        let matchConfidence = true;
+        if (confidenceValue !== "ALL") {
+            if (confidenceValue === "very_high") {
+                matchConfidence = rowConfidence >= 90;
+            } else if (confidenceValue === "high") {
+                matchConfidence = rowConfidence >= 75 && rowConfidence < 90;
+            } else if (confidenceValue === "moderate") {
+                matchConfidence = rowConfidence >= 60 && rowConfidence < 75;
+            } else if (confidenceValue === "low") {
+                matchConfidence = rowConfidence < 60;
+            }
+        }
+
         const matchSearch =
             text.includes(searchValue);
 
-        return matchClass && matchSearch;
+        return matchClass && matchConfidence && matchSearch;
     });
 
     filtered.sort((a, b) => {
