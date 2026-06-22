@@ -10,6 +10,7 @@
         ProBean Dashboard
         {% endblock %}
     </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/logo/logo.ico') }}">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -34,9 +35,7 @@
 
             <div class="flex items-center gap-2">
 
-                <div class="h-8 w-8 bg-green-700 rounded-lg flex items-center justify-center text-white font-bold">
-                    🫘
-                </div>
+                <img src="{{ url_for('static', filename='assets/logo/logo-removebg-preview.png') }}" alt="ProBean AI Logo" class="h-12 w-12">
 
                 <span class="text-slate-900 font-bold text-lg tracking-tight">
                     ProBean AI
