@@ -27,5 +27,5 @@ class Prediction(db.Model):
 
     created_at = db.Column(
         db.DateTime, 
-        default=datetime.utcnow
+        default=datetime.now
     )
