@@ -32,7 +32,6 @@ Thumbs.db
 # =========================
 # ML / Data files (optional but recommended)
 # =========================
-*.pkl
 *.joblib
 *.h5
 
