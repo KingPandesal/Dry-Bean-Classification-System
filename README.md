@@ -4,7 +4,7 @@ A Flask-based web application that uses a Machine Learning model to classify dry
 
 ---
 
-## � Table of Contents
+## ⭐ Table of Contents
 
 - [Quick Start](#quick-start)
 - [Features](#features)
