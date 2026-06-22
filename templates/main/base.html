@@ -57,8 +57,6 @@
                 <span class="text-sm font-medium">Dashboard</span>
             </a>
 
-            {% if not session.get("guest") %}
-
             <a href="{{ url_for('main.history') }}"
                class="{{ active_class if request.endpoint == 'main.history' else inactive_class }}">
                 📊
@@ -70,8 +68,6 @@
                 ⚙️
                 <span class="text-sm font-medium">Settings</span>
             </a> -->
-
-            {% endif %}
 
         </nav>
 

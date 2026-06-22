@@ -67,21 +67,24 @@ def dashboard():
 @main.route("/history")
 def history():
 
-    if session.get("guest"):
-        return redirect(url_for("main.dashboard"))
-
-    if "username" not in session:
+    if "username" not in session and not session.get("guest"):
         return redirect(url_for("auth.login_page"))
 
-    user = User.query.filter_by(
-        username=session["username"]
-    ).first()
+    user = None
 
-    predictions = Prediction.query.filter_by(
-        user_id=user.id
-    ).order_by(
-        Prediction.created_at.desc()
-    ).all()
+    if "username" in session:
+        user = User.query.filter_by(
+            username=session["username"]
+        ).first()
+
+        predictions = Prediction.query.filter_by(
+            user_id=user.id
+        ).order_by(
+            Prediction.created_at.desc()
+        ).all()
+
+    else:
+        predictions = []
 
     return render_template(
         "main/history.html",

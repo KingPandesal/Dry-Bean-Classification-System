@@ -12,7 +12,35 @@ Prediction History
 
 <main>
 
-    <div class="p-6 space-y-6">
+    {% if session.get("guest") %}
+    <div class="fixed inset-0 bg-white/20 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center space-y-4 z-50">
+            <div class="flex justify-center">
+                <div class="h-16 w-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
+                    🔐
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <h2 class="text-2xl font-bold text-slate-900">Save Your Data</h2>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    To save your predictions and track your bean classification history over time, please create an account or sign in.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-2 pt-4">
+                <a href="{{ url_for('auth.register_page') }}" class="w-full bg-emerald-600 text-white font-semibold py-3 rounded-xl hover:bg-emerald-700 active:scale-95 transition">
+                    📝 Create Account
+                </a>
+                <a href="{{ url_for('auth.login_page') }}" class="w-full bg-white text-emerald-600 font-semibold py-3 rounded-xl border border-emerald-200 hover:bg-emerald-50 active:scale-95 transition">
+                    🔑 Sign In
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="p-6 space-y-6 {% if session.get('guest') %}blur-sm pointer-events-none{% endif %}">
 
         <!-- Filters -->
         <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
