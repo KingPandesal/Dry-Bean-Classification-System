@@ -191,3 +191,13 @@ def logout():
     return redirect(
         url_for("auth.login")
     )
+
+# Guest Register Route (clears guest session and redirects to register)
+@auth.route("/guest-register")
+def guest_register():
+
+    session.clear()
+
+    return redirect(
+        url_for("auth.register_page")
+    )

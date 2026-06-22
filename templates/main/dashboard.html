@@ -11,14 +11,111 @@ ProBean Dashboard
 {% block content %}
 
 <main>
-
     <div class="p-6 space-y-6">
 
-        <!-- Stats Cards -->
+        {% if session.get("guest") %}
+        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="space-y-1">
+                <h2 class="text-xl md:text-2xl font-bold tracking-tight">Welcome to Bean Classifier AI! 👋</h2>
+                <p class="text-emerald-100 text-sm max-w-xl">
+                    You are currently using the classification platform as a guest. Create an account or sign in to save your structural features and track predictions over time.
+                </p>
+            </div>
+            <a href="{{ url_for('auth.guest_register') }}" class="bg-white text-emerald-800 font-semibold px-5 py-2.5 rounded-xl shadow-md hover:bg-emerald-50 active:scale-95 transition whitespace-nowrap self-start md:self-auto inline-block">
+                🔑 Sign In / Register
+            </a>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-green-100 p-6 shadow-sm">
+            <h3 class="text-base font-bold uppercase tracking-wider text-slate-800 mb-6 flex items-center gap-2">
+                🚀 Getting Started: How It Works
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                <div class="relative bg-emerald-50/40 border border-emerald-100/60 p-5 rounded-xl space-y-2">
+                    <div class="absolute -top-3 left-4 bg-emerald-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                    <div class="text-xl pt-2">📐</div>
+                    <h4 class="font-bold text-slate-900 text-sm">Enter Measurements</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Tap the floating action button at the bottom-right corner to open the input modal. Provide the structural profile metrics of your sample.</p>
+                </div>
+
+                <div class="relative bg-emerald-50/40 border border-emerald-100/60 p-5 rounded-xl space-y-2">
+                    <div class="absolute -top-3 left-4 bg-emerald-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                    <div class="text-xl pt-2">🤖</div>
+                    <h4 class="font-bold text-slate-900 text-sm">Model Assessment</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Our optimized Machine Learning model processes your unique feature sets against thousands of verified historical samples instantly.</p>
+                </div>
+
+                <div class="relative bg-emerald-50/40 border border-emerald-100/60 p-5 rounded-xl space-y-2">
+                    <div class="absolute -top-3 left-4 bg-emerald-600 text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                    <div class="text-xl pt-2">🎯</div>
+                    <h4 class="font-bold text-slate-900 text-sm">Review Confidence</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Receive your calculated strain designation along with an exact mathematical probability rating representing structural accuracy.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-base font-bold uppercase tracking-wider text-slate-800 pl-1">
+                📚 Classification Variety Index
+            </h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Seker</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">Highly spherical and symmetric dimensions. Noticeable for clean uniform roundness scores across size metrics.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Barbunya</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">Characterized by prominent oval-to-round geometric profiles, holding distinct ratio values.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Bombay</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">The largest physical strain profile. Massive area and perimeter distributions compared to standard samples.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Cali</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">Distinct elongated curved shapes showing an elevated major axis length paired with specialized eccentricities.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Dermason</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">Medium-to-small structured shapes. Represents one of the most structurally dense, balanced profiles.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Horoz</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">Highly linear and oblong. Exhibits a significantly long major axis coupled with narrow minor dimension widths.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border border-green-100 flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <span class="inline-block bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider mb-2">Sira</span>
+                        <p class="text-xs text-slate-500 leading-relaxed">Smaller elliptical profile. Possesses highly stable, consistent solidity and roundness parameters.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <!-- Total Predictions -->
-            <div class="bg-white rounded-xl border border-green-100 p-6">
+            <div class="bg-white rounded-xl border border-green-100 p-6 shadow-sm">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-slate-500 text-sm">Total Predictions</p>
@@ -26,52 +123,33 @@ ProBean Dashboard
                             {{ stats.total_predictions }}
                         </p>
                         <p class="text-xs text-green-600 mt-1">this month</p>
-
-                        <!-- <p class="text-xs mt-1
-                            {% if stats.monthly_growth >= 0 %}
-                                text-green-600
-                            {% else %}
-                                text-red-600
-                            {% endif %}">
-
-                            {% if stats.monthly_growth >= 0 %}
-                                ↑ {{ stats.monthly_growth }}% from last month
-                            {% else %}
-                                ↓ {{ stats.monthly_growth | abs }}% from last month
-                            {% endif %}
-                        </p> -->
                     </div>
-
                     <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
                         🫘
                     </div>
                 </div>
             </div>
 
-            <!-- Current Prediction -->
-            <div class="bg-white rounded-xl border border-green-100 p-6">
+            <div class="bg-white rounded-xl border border-green-100 p-6 shadow-sm">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-slate-500 text-sm">Most Predicted Class</p>
                         <p class="text-2xl font-bold text-green-700 mt-1">{{ stats.most_predicted }}</p>
                         <p class="text-xs text-slate-500 mt-1">Last prediction: recent</p>
                     </div>
-
                     <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
                         🌱
                     </div>
                 </div>
             </div>
 
-            <!-- Avg Confidence -->
-            <div class="bg-white rounded-xl border border-green-100 p-6">
+            <div class="bg-white rounded-xl border border-green-100 p-6 shadow-sm">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-slate-500 text-sm">Model Accuracy</p>
                         <p class="text-2xl font-bold text-slate-900 mt-1">{{ stats.model_accuracy }}%</p>
                         <p class="text-xs text-green-600 mt-1">High model accuracy</p>
                     </div>
-
                     <div class="h-12 w-12 bg-green-50 rounded-lg flex items-center justify-center">
                         🤖
                     </div>
@@ -80,49 +158,35 @@ ProBean Dashboard
 
         </div>
 
-        <!-- Analytics -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-            <!-- Bean Distribution -->
-            <div class="bg-white rounded-xl border border-green-100 p-6">
-
+            <div class="bg-white rounded-xl border border-green-100 p-6 shadow-sm">
                 <h3 class="text-lg font-semibold text-slate-800 mb-4">
                     Bean Class Distribution
                 </h3>
-
                 <div class="flex justify-center items-center h-64">
                     <canvas id="beanChart"></canvas>
                 </div>
-
             </div>
 
-            <!-- Confidence -->
-            <div class="bg-white rounded-xl border border-green-100 p-6">
-
+            <div class="bg-white rounded-xl border border-green-100 p-6 shadow-sm">
                 <h3 class="text-lg font-semibold text-slate-800 mb-4">
                     Confidence Trend
                 </h3>
-
                 <canvas id="confidenceChart"></canvas>
-
             </div>
 
         </div>
 
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const dashboardData = JSON.parse('{{ stats | tojson | safe }}');
+        </script>
+        <script src="{{ url_for('static', filename='js/main/dashboard.js') }}"></script>
+        
+        {% endif %}
 
     </div>
-
 </main>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-    const dashboardData = JSON.parse('{{ stats | tojson | safe }}');
-
-</script>
-
-<script src="{{ url_for('static', filename='js/main/dashboard.js') }}"></script>
 
 {% endblock %}
