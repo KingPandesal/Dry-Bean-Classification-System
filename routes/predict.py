@@ -4,12 +4,16 @@ from ml.model_loader import model, label_encoder
 
 import pandas as pd
 import numpy as np
+import os
 
 from models.prediction import Prediction
 from models.user import User
 from extensions import db
 
 import json
+
+# Path to the CSV dataset
+CSV_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "instance", "Dry_Bean_Dataset.csv")
 
 predict = Blueprint("predict", __name__)
 
@@ -90,6 +94,21 @@ def predict_bean():
 
                 db.session.add(history)
                 db.session.commit()
+
+        # ============================
+        # SAVE TO CSV
+        # ============================
+
+        # Create row with features and predicted class
+        new_row = features + [class_name]
+
+        # Append to CSV
+        try:
+            new_df = pd.DataFrame([new_row], columns=FEATURE_NAMES + ["Class"])
+            new_df.to_csv(CSV_PATH, mode="a", header=False, index=False)
+        except Exception as e:
+            # Log error but don't fail the prediction
+            print(f"Error saving to CSV: {e}")
 
         # ============================
 
