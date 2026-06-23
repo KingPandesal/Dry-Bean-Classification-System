@@ -5,6 +5,7 @@ from ml.model_loader import model, label_encoder
 import pandas as pd
 import numpy as np
 import os
+from datetime import datetime
 
 from models.prediction import Prediction
 from models.user import User
@@ -12,10 +13,12 @@ from extensions import db
 
 import json
 
-# Path to the CSV dataset
-CSV_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "instance", "Dry_Bean_Dataset.csv")
-
 predict = Blueprint("predict", __name__)
+
+# Paths
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+CSV_PATH = os.path.join(BASE_DIR, "instance", "Dry_Bean_Dataset.csv")
+HISTORY_CSV_PATH = os.path.join(BASE_DIR, "instance", "prediction_history.csv")
 
 FEATURE_NAMES = [
     "Area",
@@ -35,6 +38,75 @@ FEATURE_NAMES = [
     "ShapeFactor3",
     "ShapeFactor4"
 ]
+
+HISTORY_COLUMNS = [
+    "Timestamp",
+    "Input_Source",
+    *FEATURE_NAMES,
+    "Actual_Class",
+    "Predicted_Class",
+    "Prediction_Status"
+]
+
+
+def find_matching_row(features, dataset_df):
+    """
+    Find if the input features match any row in the original dataset.
+    Returns the matched row's Class if found, None otherwise.
+    """
+    for idx, row in dataset_df.iterrows():
+        match = True
+        for i, feat_name in enumerate(FEATURE_NAMES):
+            if abs(row[feat_name] - features[i]) > 0.001:  # tolerance for float comparison
+                match = False
+                break
+        if match:
+            return row["Class"]
+    return None
+
+
+def save_to_history(features, actual_class, predicted_class, input_source):
+    """
+    Append prediction to prediction_history.csv
+    """
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Determine prediction status
+    if actual_class is None:
+        prediction_status = "N/A"
+    elif actual_class == predicted_class:
+        prediction_status = "Correct"
+    else:
+        prediction_status = "Incorrect"
+
+    row_data = [
+        timestamp,
+        input_source,
+        *features,
+        actual_class if actual_class else "",
+        predicted_class,
+        prediction_status
+    ]
+
+    # Create CSV if not exists
+    if not os.path.exists(HISTORY_CSV_PATH):
+        df = pd.DataFrame([row_data], columns=HISTORY_COLUMNS)
+        df.to_csv(HISTORY_CSV_PATH, index=False)
+    else:
+        df = pd.DataFrame([row_data], columns=HISTORY_COLUMNS)
+        df.to_csv(HISTORY_CSV_PATH, mode="a", header=False, index=False)
+
+
+# Load original dataset once at module level for fast matching
+_dataset_cache = None
+
+
+def get_dataset():
+    """Load and cache the original dataset"""
+    global _dataset_cache
+    if _dataset_cache is None:
+        _dataset_cache = pd.read_csv(CSV_PATH)
+    return _dataset_cache
 
 
 @predict.route("/predict", methods=["POST"])
@@ -76,6 +148,21 @@ def predict_bean():
         class_name = label_encoder.inverse_transform([pred])[0]
 
         # ============================
+        # PREDICTION HISTORY LOGIC
+        # ============================
+
+        # Check if input matches original dataset
+        dataset_df = get_dataset()
+        matched_class = find_matching_row(features, dataset_df)
+
+        if matched_class:
+            # CASE 1: Dataset match found
+            save_to_history(features, matched_class, class_name, "Dataset")
+        else:
+            # CASE 2: New user input
+            save_to_history(features, None, class_name, "Manual")
+
+        # ============================
         # SAVE TO DATABASE
         # ============================
 
@@ -94,21 +181,6 @@ def predict_bean():
 
                 db.session.add(history)
                 db.session.commit()
-
-        # ============================
-        # SAVE TO CSV
-        # ============================
-
-        # Create row with features and predicted class
-        new_row = features + [class_name]
-
-        # Append to CSV
-        try:
-            new_df = pd.DataFrame([new_row], columns=FEATURE_NAMES + ["Class"])
-            new_df.to_csv(CSV_PATH, mode="a", header=False, index=False)
-        except Exception as e:
-            # Log error but don't fail the prediction
-            print(f"Error saving to CSV: {e}")
 
         # ============================
 
